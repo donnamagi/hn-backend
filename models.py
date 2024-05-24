@@ -25,7 +25,7 @@ class BestArticle(Base):
   parts = Column(ARRAY(Integer), nullable=True)
   descendants = Column(Integer, nullable=True)
   content_summary = Column(Text, nullable=True)
-  keywords = Column(String(255), nullable=True)
+  keywords = Column(ARRAY(String), nullable=True)
   created_at = Column(TIMESTAMP(timezone=True), server_default=func.now())
   updated_at = Column(TIMESTAMP(timezone=True, ), server_default=func.now(), onupdate=func.now())
 
