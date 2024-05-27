@@ -1,19 +1,21 @@
 # https://aws.amazon.com/developer/language/python/
 
 import boto3
-import psycopg2
-import psycopg2.extras
 from botocore.exceptions import ClientError
 import json
 import os
 from dotenv import load_dotenv
+from sqlalchemy import create_engine, orm
+from app.models import Base, BestArticle
 
 load_dotenv()
 
 class DatabaseService:
   def __init__(self):
     self.secret = self.get_secret()
-    self.db_instance = self.connect_to_db()
+    self.engine = self.connect_to_db()
+    self.Session = orm.sessionmaker(bind=self.engine)
+    Base.metadata.create_all(self.engine)
 
   def get_secret(self):
     secret_name = os.getenv("AWS_RDS_SECRET")
@@ -52,62 +54,31 @@ class DatabaseService:
       return None
 
     try:
-      conn = psycopg2.connect(
-        host=db_host,
-        port=db_port,
-        user=db_user,
-        password=db_password
-      )
-
-      print("Connected to db")
-      return conn
-
+      connection_string = f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/postgres'
+      engine = create_engine(connection_string, pool_pre_ping=True)
+      return engine
     except Exception as e:
       print(f"Error connecting to the database: {e}")
       return None
 
   def insert_articles_batch(self, articles):
+    session = self.Session()
     try:
-      with self.db_instance.cursor() as cursor:
-          insert_query = """
-          INSERT INTO best_articles (id, deleted, type, by, time, text, dead, parent, poll, kids, url, score, title, parts, descendants, content_summary, keywords) 
-          VALUES %s
-          """
-          values = [
-            (
-              article.get('id'),
-              article.get('deleted', None),
-              article.get('type', None),
-              article.get('by', None),
-              article.get('time', None),
-              article.get('text', None),
-              article.get('dead', None),
-              article.get('parent', None),
-              article.get('poll', None),
-              article.get('kids', None),
-              article.get('url', None),
-              article.get('score', None),
-              article.get('title', None),
-              article.get('parts', None),
-              article.get('descendants', None),
-              article.get('content_summary', None),
-              article.get('keywords', None)
-            ) for article in articles
-          ]
-          psycopg2.extras.execute_values(cursor, insert_query, values)
-          self.db_instance.commit()
+      session.bulk_insert_mappings(BestArticle, articles)
+      session.commit()
+      print("Inserted articles batch")
     except Exception as e:
       print(f"Error inserting articles batch: {e}")
-      self.db_instance.rollback()
+      session.rollback()
+    finally:
+      session.close()
 
   def get_articles(self):
+    session = self.Session()
     try:
-      with self.db_instance.cursor() as cursor:
-        cursor.execute("SELECT * FROM best_articles")
-        print("fetching articles")
-        articles = cursor.fetchall()
-        print('works')
-        return articles
+      articles = session.query(BestArticle).all()
+      return articles
     except Exception as e:
-      print(f"Error getting articles: {e}")
-      return None
+      raise e
+    finally:
+      session.close()

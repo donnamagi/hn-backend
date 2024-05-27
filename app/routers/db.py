@@ -7,5 +7,9 @@ db = DatabaseService()
 
 @router.get("/all")
 async def get_all():
-  articles = db.get_articles()
-  return JSONResponse(content={"message": "Data retrieved", "articles_count": len(articles)})
+  try:
+    articles = db.get_articles()
+    return JSONResponse(content={"message": "Data retrieved", "articles_count": len(articles)})
+  except Exception as e:
+    return JSONResponse(content={"message": f"Error: {e}"})
+
