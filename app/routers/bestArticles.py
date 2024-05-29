@@ -2,7 +2,7 @@ from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 from app.services.db import DatabaseService
 
-router = APIRouter(prefix="/db", tags=["db"])
+router = APIRouter(prefix="/best-articles", tags=["best articles"])
 db = DatabaseService()
 
 @router.get("/all")
