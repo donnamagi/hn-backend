@@ -61,7 +61,7 @@ def get_unique_ids(db:dict, res:list):
     db_ids.add(item['id'])
 
   add_ids = []
-  for id in res[:50]:
+  for id in res[:30]:
     if id not in db_ids:
       add_ids.append(id)
 

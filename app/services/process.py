@@ -1,12 +1,11 @@
-from scrape import ProcessService
-from app.dependencies import DatabaseService, MilvusService
-from hn import get_top, get_article
-from helpers import get_unique_ids
-from pprint import pprint
+from app.services.scrape import ProcessService
+from app.dependencies import MilvusService, DatabaseService
+from app.services.hn import get_top, get_article
+from app.services.helpers import get_unique_ids
 
 def process_articles():
-  vector_db = MilvusService()
   db = DatabaseService()
+  vector_db = MilvusService()
   processor = ProcessService()
 
   collection = vector_db.get_all_db_ids()
@@ -21,7 +20,11 @@ def process_articles():
   articles = []
   vector_entries = []
 
-  for id in new_ids[:10]:
+  if not new_ids:
+    print("No new articles to process.")
+    return
+
+  for id in new_ids:
     article = get_article(id)
 
     # adds keywords, summary, embedding
@@ -36,7 +39,6 @@ def process_articles():
       vector_entries.append(vector_entry)
       
       article.pop('vector')
-      pprint(article)
       articles.append(article)
     except:
       print("Error processing article:", article['id'])
@@ -45,6 +47,5 @@ def process_articles():
   # batch insert
   db.insert_articles_batch(articles)
   vector_db.insert(vector_entries)
-  print(len(articles), "articles added.")
+  return print(len(articles), "articles added.")
 
-process_articles()

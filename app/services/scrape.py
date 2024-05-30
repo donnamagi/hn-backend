@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from groq import Groq
 import voyageai
 from bs4 import BeautifulSoup
-from helpers import clean_text, clean_llm_text
+from app.services.helpers import clean_text, clean_llm_text
 import requests
 import ast
 from datetime import datetime, timezone
