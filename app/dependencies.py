@@ -8,7 +8,8 @@ from dotenv import load_dotenv
 from sqlalchemy import create_engine, orm
 from pymilvus import MilvusClient
 import threading
-from app.models import Base, BestArticle
+from app.models import Base
+from contextlib import contextmanager
 
 load_dotenv()
 
@@ -77,18 +78,6 @@ class DatabaseService:
       print(f"Error connecting to the database: {e}")
       return None
 
-  def insert_articles_batch(self, articles):
-    session = self.Session()
-    try:
-      session.bulk_insert_mappings(BestArticle, articles)
-      session.commit()
-      print("Inserted articles batch")
-    except Exception as e:
-      print(f"Error inserting articles batch: {e}")
-      session.rollback()
-    finally:
-      session.close()
-
 
 class MilvusService:
   _instance = None
@@ -138,6 +127,7 @@ class MilvusService:
       print("Limit reached. Only first 1000 items returned.")
     return res
 
+@contextmanager
 def get_session():
   db_service = DatabaseService()
   session = db_service.Session()

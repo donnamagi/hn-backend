@@ -1,10 +1,10 @@
 from app.services.scrape import ProcessService
-from app.dependencies import MilvusService, DatabaseService
+from app.dependencies import MilvusService, get_session
 from app.services.hn import get_best, get_article
 from app.services.helpers import get_unique_ids
+from app.models import BestArticle
 
 def process_best():
-  db = DatabaseService()
   vector_db = MilvusService()
   processor = ProcessService()
 
@@ -45,7 +45,15 @@ def process_best():
       continue
 
   # batch insert
-  db.insert_articles_batch(articles)
+  try:
+    with get_session() as session:
+      session.bulk_insert_mappings(BestArticle, articles)
+      session.commit()
+      print("Inserted articles batch")
+  except Exception as e:
+    print(f"Error inserting articles batch: {e}")
+    session.rollback()
+    return False
   vector_db.insert(vector_entries)
   return print(len(articles), "articles added.")
 
