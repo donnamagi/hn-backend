@@ -6,6 +6,7 @@ import json
 import os
 from dotenv import load_dotenv
 from sqlalchemy import create_engine, orm
+from contextlib import contextmanager
 from app.models import Base, BestArticle
 
 load_dotenv()
@@ -73,12 +74,12 @@ class DatabaseService:
     finally:
       session.close()
 
-  def get_articles(self):
-    session = self.Session()
-    try:
-      articles = session.query(BestArticle).all()
-      return articles
-    except Exception as e:
-      raise e
-    finally:
-      session.close()
+
+@contextmanager
+def get_db():
+  db_service = DatabaseService()
+  db = db_service.Session()
+  try:
+    yield db
+  finally:
+    db.close()
