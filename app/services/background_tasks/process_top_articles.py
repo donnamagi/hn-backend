@@ -3,7 +3,7 @@ from app.dependencies import MilvusService, DatabaseService
 from app.services.hn import get_top, get_article
 from app.services.helpers import get_unique_ids
 
-def process_articles():
+def process_top():
   db = DatabaseService()
   vector_db = MilvusService()
   processor = ProcessService()

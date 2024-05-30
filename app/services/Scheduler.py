@@ -1,5 +1,5 @@
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
-from app.services.process import process_articles
+from app.services.background_tasks.process_top_articles import process_articles
 import threading
 
 
