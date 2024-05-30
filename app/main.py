@@ -1,19 +1,22 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI
 from app.routers import bestArticles
 from app.dependencies import DatabaseService
+from contextlib import asynccontextmanager
 
-app = FastAPI()
 
-db_service = DatabaseService()
+""" This code will be executed once, before the application starts (and stops) receiving requests """
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+  # on startup
+  db_service = DatabaseService()
 
-def get_db():
-  db = db_service.Session()
-  try:
-    yield db
-  finally:
-    db.close()
+  yield 
 
-app.include_router(bestArticles.router, prefix="/best", dependencies=[Depends(get_db)])
+  # on shutdown
+  db_service.engine.dispose()
+
+app = FastAPI(lifespan=lifespan)
+app.include_router(bestArticles.router)
 
 @app.get("/")
 async def root():

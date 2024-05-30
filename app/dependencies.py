@@ -6,19 +6,34 @@ import json
 import os
 from dotenv import load_dotenv
 from sqlalchemy import create_engine, orm
-from contextlib import contextmanager
+import threading
 from app.models import Base, BestArticle
 
 load_dotenv()
 
 class DatabaseService:
+  _instance = None
+  _lock = threading.Lock()
+
+  def __new__(cls, *args, **kwargs):
+    if not cls._instance:
+      print("Creating new DB instance")
+      with cls._lock:
+        if not cls._instance:
+          cls._instance = super(DatabaseService, cls).__new__(cls, *args, **kwargs)
+    return cls._instance
+
   def __init__(self):
-    self.secret = self.get_secret()
-    self.engine = self.connect_to_db()
+    if hasattr(self, 'initialized') and self.initialized:
+      return
+    print("Initializing DB")
+    self.secret = self._get_secret()
+    self.engine = self._connect_to_db()
     self.Session = orm.sessionmaker(bind=self.engine)
     Base.metadata.create_all(self.engine)
+    self.initialized = True
 
-  def get_secret(self):
+  def _get_secret(self):
     secret_name = os.getenv("AWS_RDS_SECRET")
     region_name = "eu-north-1"
 
@@ -41,10 +56,9 @@ class DatabaseService:
       raise e
 
     secret = get_secret_value_response['SecretString']
-    print('got secret')
     return json.loads(secret)
 
-  def connect_to_db(self):
+  def _connect_to_db(self):
     db_host = os.getenv("AWS_HOST")
     db_port = 5432
     db_user = self.secret['username']
@@ -75,11 +89,10 @@ class DatabaseService:
       session.close()
 
 
-@contextmanager
-def get_db():
+def get_session():
   db_service = DatabaseService()
-  db = db_service.Session()
+  session = db_service.Session()
   try:
-    yield db
+    yield session
   finally:
-    db.close()
+    session.close()
