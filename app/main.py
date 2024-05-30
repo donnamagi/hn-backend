@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.routers import bestArticles
+from app.routers import bestArticles, jobs
 from app.dependencies import DatabaseService
 from app.services.Scheduler import SchedulerService
 from contextlib import asynccontextmanager
@@ -16,10 +16,11 @@ async def lifespan(app: FastAPI):
 
   # on shutdown
   db_service.engine.dispose()
-  scheduler.stop()
+  await scheduler.stop()
 
 app = FastAPI(lifespan=lifespan)
 app.include_router(bestArticles.router)
+app.include_router(jobs.router)
 
 @app.get("/")
 async def root():

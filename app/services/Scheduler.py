@@ -30,12 +30,21 @@ class SchedulerService:
     )
 
     self.scheduler.start()
+    print("Scheduler started")
 
-  def stop(self):
+
+  def get_schedule(self):
+    schedule = []
+    for job in self.scheduler.get_jobs():
+      schedule.append({
+        "id": job.id,
+        "name": job.name,
+        "trigger": job.trigger.__str__(),
+        "max_instances": job.max_instances,
+        "next_run_time": job.next_run_time.isoformat()
+      })
+    return schedule
+
+  async def stop(self):
+    print("Scheduler stopped")
     self.scheduler.shutdown()
-
-
-
-  
-
-
