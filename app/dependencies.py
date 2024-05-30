@@ -6,6 +6,7 @@ import json
 import os
 from dotenv import load_dotenv
 from sqlalchemy import create_engine, orm
+from pymilvus import MilvusClient
 import threading
 from app.models import Base, BestArticle
 
@@ -88,6 +89,54 @@ class DatabaseService:
     finally:
       session.close()
 
+
+class MilvusService:
+  _instance = None
+  _lock = threading.Lock()
+  def __new__(cls, *args, **kwargs):
+    if not cls._instance:
+      print("Creating new Milvus instance")
+      with cls._lock:
+        if not cls._instance:
+          cls._instance = super(MilvusService, cls).__new__(cls, *args, **kwargs)
+    return cls._instance
+
+  def __init__(self):
+    if hasattr(self, 'initialized') and self.initialized:
+      return
+    print("Initializing Milvus")
+    self.client = MilvusClient(
+      uri=os.getenv("MILVUS_CLUSTER_ENDPOINT"),
+      token=os.getenv("MILVUS_API_KEY")
+    )
+    self.collection_name = 'HackerNews'
+    self.initialized = True
+
+  def insert(self, data):
+    return self.client.insert(
+      collection_name=self.collection_name,
+      data=data
+    )
+  
+  def search_vector(self, vectors, fields=['id'], limit=5):
+    return self.client.search(
+      collection_name=self.collection_name,
+      data=vectors,
+      filter="content != ''",
+      output_fields=fields,
+      limit=limit
+    )[0]
+  
+  def get_all_db_ids(self):
+    res = self.client.query(
+      collection_name=self.collection_name,
+      filter="id > 0",
+      output_fields=["id"],
+      limit=1000
+    )
+    if len(res) == 1000:
+      print("Limit reached. Only first 1000 items returned.")
+    return res
 
 def get_session():
   db_service = DatabaseService()

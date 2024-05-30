@@ -1,6 +1,5 @@
-from db_vector import MilvusService
 from scrape import ProcessService
-from app.dependencies import DatabaseService
+from app.dependencies import DatabaseService, MilvusService
 from hn import get_top, get_article
 from helpers import get_unique_ids
 from pprint import pprint
