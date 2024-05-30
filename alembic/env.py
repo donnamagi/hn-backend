@@ -6,7 +6,8 @@ from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
 from alembic import context
-from models import Base
+from app.models import Base
+from app.dependencies import DatabaseService
 
 load_dotenv()
 
@@ -17,9 +18,14 @@ config = context.config
 # https://stackoverflow.com/questions/22178339/is-it-possible-to-store-the-alembic-connect-string-outside-of-alembic-ini
 # here we allow ourselves to pass interpolation vars to alembic.ini
 # fron the host env
+db = DatabaseService()
+credentials = db._get_secret()
+db_pass = credentials["password"]
+db_user = credentials["username"]
+
 section = config.config_ini_section
-config.set_section_option(section, "DB_USER", os.environ.get("DB_USER"))
-config.set_section_option(section, "DB_PASS", os.environ.get("DB_PASS"))
+config.set_section_option(section, "DB_USER", db_user)
+config.set_section_option(section, "DB_PASS", db_pass)
 config.set_section_option(section, "DB_HOST", os.environ.get("AWS_HOST"))
 
 # Interpret the config file for Python logging.
