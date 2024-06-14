@@ -53,16 +53,12 @@ def clean_llm_text(text:str):
   return text.strip()
 
 
-def get_unique_ids(db:dict, res:list):
+def get_unique_ids(db:list, res:list):
   """Get unique IDs not yet in the database."""
-
-  db_ids = set()
-  for item in db:
-    db_ids.add(item['id'])
 
   add_ids = []
   for id in res[:30]:
-    if id not in db_ids:
+    if id not in db:
       add_ids.append(id)
 
   return add_ids

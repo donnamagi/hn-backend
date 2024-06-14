@@ -1,6 +1,5 @@
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
-from app.services.background_tasks.process_top_articles import process_top
-from app.services.background_tasks.process_best_articles import process_best
+from app.services.background_tasks.process_top_articles import process_articles
 from app.services.background_tasks.store_all_recents import store_all_recents
 import threading
 
@@ -26,16 +25,9 @@ class SchedulerService:
   def _schedule_tasks(self):
 
     self.scheduler.add_job(
-      process_top, 
+      process_articles, 
       "cron", 
       hour='*/6'
-    )
-
-    self.scheduler.add_job(
-      process_best, 
-      "cron", 
-      hour='*/6',
-      minute='15'
     )
 
     self.scheduler.add_job(
