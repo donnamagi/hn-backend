@@ -31,7 +31,11 @@ class DatabaseService:
     print("Initializing DB")
     self.secret = self._get_secret()
     self.engine = self._connect_to_db()
-    self.Session = orm.sessionmaker(bind=self.engine)
+    self.Session = orm.sessionmaker(
+      bind=self.engine,
+      autocommit=False,
+      autoflush=False
+      )
     Base.metadata.create_all(self.engine)
     self.initialized = True
 
@@ -127,10 +131,10 @@ class MilvusService:
       print("Limit reached. Only first 1000 items returned.")
     return res
 
-@contextmanager
 def get_session():
   db_service = DatabaseService()
   session = db_service.Session()
+  print("Session created")
   try:
     yield session
   finally:
