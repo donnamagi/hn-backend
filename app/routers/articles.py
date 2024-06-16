@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 from app.dependencies import get_session
 from datetime import datetime, timedelta
 
-router = APIRouter(prefix="/best-articles", tags=["best articles"])
+router = APIRouter(prefix="/articles", tags=["articles"])
 
 @router.get("/")
 async def get_all(db: Session = Depends(get_session)):

@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.routers import jobs, articles
+from app.routers import jobs, articles, keywords
 from app.dependencies import DatabaseService
 from app.services.Scheduler import SchedulerService
 from contextlib import asynccontextmanager
@@ -20,6 +20,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 app.include_router(articles.router)
+app.include_router(keywords.router)
 app.include_router(jobs.router)
 
 @app.get("/")
