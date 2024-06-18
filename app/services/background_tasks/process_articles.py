@@ -1,5 +1,5 @@
 from app.services.scrape import ProcessService
-from app.dependencies import MilvusService, get_session
+from app.dependencies import MilvusService, get_db
 from app.services.hn import get_top, get_article, get_best
 from app.services.helpers import get_unique_ids
 from app.models import Article
@@ -8,11 +8,9 @@ from datetime import datetime, timedelta
 def process_articles():
   vector_db = MilvusService()
   processor = ProcessService()
-
-  db = get_session()
-
-  with db as session:
-    week = datetime.now() - timedelta(days=7)
+    
+  week = datetime.now() - timedelta(days=7)
+  with get_db() as session:
     collection = [id[0] for id in session.query(Article.id).filter(Article.created_at >= week).all()]
     print(len(collection), "articles from the past week.")
     print(collection[:5])
@@ -63,7 +61,7 @@ def process_articles():
 
   # batch insert
   try:
-    with get_session() as session:
+    with get_db() as session:
       session.bulk_insert_mappings(Article, articles)
       session.commit()
       print("Inserted articles batch")

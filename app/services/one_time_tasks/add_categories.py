@@ -1,8 +1,8 @@
 from sqlalchemy import update
 from app.models import Article, Recent
-from app.dependencies import get_session
+from app.dependencies import get_db
 
-db = get_session()
+db = get_db()
 
 def add_categories():
   try:

@@ -131,7 +131,8 @@ class MilvusService:
       print("Limit reached. Only first 1000 items returned.")
     return res
 
-def get_session():
+@contextmanager
+def get_db():
   db_service = DatabaseService()
   session = db_service.Session()
   print("Session created")
@@ -139,3 +140,12 @@ def get_session():
     yield session
   finally:
     session.close()
+
+
+def get_session():
+  db_service = DatabaseService()
+  db = db_service.Session()
+  try:
+    yield db
+  finally:
+    db.close()
