@@ -45,6 +45,10 @@ def process_articles():
       print("Processing article:", article['title'])
       # adds keywords, summary, embedding
       article = processor.process_article(article) 
+      if not article:
+        print("Article processing failed for:", id)
+        continue
+
       article['category'] = category
 
       vector_entry = {
