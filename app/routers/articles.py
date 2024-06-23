@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from fastapi.responses import JSONResponse
 from app.models import Article
 from sqlalchemy.orm import Session
-from app.dependencies import get_session
+from app.dependencies import get_session, MilvusService, get_milvus_session
 from datetime import datetime, timedelta
 
 router = APIRouter(prefix="/articles", tags=["articles"])
@@ -75,3 +75,27 @@ async def get_article(article_id: int, db: Session = Depends(get_session)):
       content={"message": f"Error: {e}"}
     )
 
+@router.get("/similar/{article_id}")
+async def get_article(article_id: int, milvus: MilvusService = Depends(get_milvus_session), db: Session = Depends(get_session)):
+  try:
+    res = milvus.get_similar(id=article_id)
+    res.pop(0) # first result == same article
+
+    articles = []
+    for match in res:
+      article = db.query(Article).filter(Article.id == match['id']).first()
+      if article:
+        articles.append(article)
+
+    if articles:
+      return {"message": "Article found", "article": articles}
+    else:
+      return JSONResponse(
+        status_code=404,
+        content={"message": "Article not found"}
+      )
+  except Exception as e:
+    return JSONResponse(
+      status_code=500,
+      content={"message": f"Error: {e}"}
+    )

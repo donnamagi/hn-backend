@@ -121,16 +121,22 @@ class MilvusService:
       limit=limit
     )[0]
   
-  def get_all_db_ids(self):
-    res = self.client.query(
+  def search_id(self, id):
+    return self.client.query(
       collection_name=self.collection_name,
-      filter="id > 0",
-      output_fields=["id"],
-      limit=1000
+      filter=f"id == {id}",
+      output_fields=["id", "vector"],
+      limit=1
     )
-    if len(res) == 1000:
-      logging.info("Limit reached. Only first 1000 items returned.")
-    return res
+  
+  def get_similar(self, id):
+    return self.client.search(
+      collection_name=self.collection_name,
+      data=[self.search_id(id)[0]['vector']],
+      filter="content != ''",
+      output_fields=["id"],
+      limit=6
+    )[0]
 
 @contextmanager
 def get_db():
@@ -150,3 +156,11 @@ def get_session():
     yield db
   finally:
     db.close()
+
+def get_milvus_session():
+  milvus = MilvusService()
+  try:
+    yield milvus
+  finally:
+    # milvus.close()
+    pass
