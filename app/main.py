@@ -1,18 +1,20 @@
 from fastapi import FastAPI
+from contextlib import asynccontextmanager
 from fastapi.middleware.cors import CORSMiddleware
+
 from app.routers import jobs, articles, keywords
 from app.dependencies import DatabaseService
 from app.services.Scheduler import SchedulerService
-from contextlib import asynccontextmanager
-from log import setup_sentry_and_logging
+from app.log import setup_sentry_and_logging
+
 
 """ This code will be executed once, before the application starts (and stops) receiving requests """
 @asynccontextmanager
 async def lifespan(app: FastAPI):
   # on startup
+  setup_sentry_and_logging()
   db_service = DatabaseService()
   scheduler = SchedulerService()
-  setup_sentry_and_logging()
 
   yield 
 

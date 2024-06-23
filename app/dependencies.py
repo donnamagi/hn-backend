@@ -10,6 +10,7 @@ from pymilvus import MilvusClient
 import threading
 from app.models import Base
 from contextlib import contextmanager
+import logging
 
 load_dotenv()
 
@@ -19,7 +20,7 @@ class DatabaseService:
 
   def __new__(cls, *args, **kwargs):
     if not cls._instance:
-      print("Creating new DB instance")
+      logging.info("Creating new DB instance")
       with cls._lock:
         if not cls._instance:
           cls._instance = super(DatabaseService, cls).__new__(cls, *args, **kwargs)
@@ -28,7 +29,7 @@ class DatabaseService:
   def __init__(self):
     if hasattr(self, 'initialized') and self.initialized:
       return
-    print("Initializing DB")
+    logging.info("Initializing DB")
     self.secret = self._get_secret()
     self.engine = self._connect_to_db()
     self.Session = orm.sessionmaker(
@@ -71,7 +72,7 @@ class DatabaseService:
     db_password = self.secret['password']
 
     if not all([db_host, db_port, db_user, db_password]):
-      print("Missing database connection parameters.")
+      logging.info("Missing database connection parameters.")
       return None
 
     try:
@@ -79,7 +80,7 @@ class DatabaseService:
       engine = create_engine(connection_string, pool_pre_ping=True)
       return engine
     except Exception as e:
-      print(f"Error connecting to the database: {e}")
+      logging.info(f"Error connecting to the database: {e}")
       return None
 
 
@@ -88,7 +89,7 @@ class MilvusService:
   _lock = threading.Lock()
   def __new__(cls, *args, **kwargs):
     if not cls._instance:
-      print("Creating new Milvus instance")
+      logging.info("Creating new Milvus instance")
       with cls._lock:
         if not cls._instance:
           cls._instance = super(MilvusService, cls).__new__(cls, *args, **kwargs)
@@ -97,7 +98,7 @@ class MilvusService:
   def __init__(self):
     if hasattr(self, 'initialized') and self.initialized:
       return
-    print("Initializing Milvus")
+    logging.info("Initializing Milvus")
     self.client = MilvusClient(
       uri=os.getenv("MILVUS_CLUSTER_ENDPOINT"),
       token=os.getenv("MILVUS_API_KEY")
@@ -128,14 +129,14 @@ class MilvusService:
       limit=1000
     )
     if len(res) == 1000:
-      print("Limit reached. Only first 1000 items returned.")
+      logging.info("Limit reached. Only first 1000 items returned.")
     return res
 
 @contextmanager
 def get_db():
   db_service = DatabaseService()
   session = db_service.Session()
-  print("Session created")
+  logging.info("Session created")
   try:
     yield session
   finally:

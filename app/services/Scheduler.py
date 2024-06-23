@@ -1,7 +1,9 @@
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from app.services.background_tasks.process_articles import process_articles
 from app.services.background_tasks.store_all_recents import store_all_recents
+from app.services.background_tasks.update_scores import update_scores
 import threading
+import logging
 
 
 class SchedulerService:
@@ -37,8 +39,15 @@ class SchedulerService:
       minute='30'
     )
 
+    # self.scheduler.add_job(
+    #   update_scores, 
+    #   "cron", 
+    #   # hour='*/1',
+    #   # minute='5'
+    #   # minute='*/1'
+    # )
+
     self.scheduler.start()
-    print("Scheduler started")
 
 
   def get_schedule(self):
@@ -54,5 +63,4 @@ class SchedulerService:
     return schedule
 
   async def stop(self):
-    print("Scheduler stopped")
     self.scheduler.shutdown()
