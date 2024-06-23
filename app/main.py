@@ -4,43 +4,7 @@ from app.routers import jobs, articles, keywords
 from app.dependencies import DatabaseService
 from app.services.Scheduler import SchedulerService
 from contextlib import asynccontextmanager
-import sentry_sdk
-import os
-from sentry_sdk.integrations.logging import LoggingIntegration
-import logging
-
-
-""" Sentry setup to monitor errors in the live app. https://donnamagi.sentry.io/ """
-def setup_logging():
-  logging.basicConfig(level=logging.INFO,
-                      format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                      datefmt='%Y-%m-%d %H:%M:%S')
-  
-  print("Logging configured")
-
-sentry_logging = LoggingIntegration(
-  level=logging.INFO,
-  event_level=logging.ERROR 
-)
-
-functions_to_trace = [
-  {"qualified_name": "app.services.background_tasks.process_articles.process_articles"},
-  {"qualified_name": "app.services.background_tasks.store_all_recents.update_scores"},
-]
-
-sentry_sdk.init(
-  dsn=os.getenv("SENTRY_DSN"),
-  # Set traces_sample_rate to 1.0 to capture 100%
-  # of transactions for performance monitoring.
-  traces_sample_rate=1.0,
-  enable_tracing=True,
-  functions_to_trace=functions_to_trace,
-  # Set profiles_sample_rate to 1.0 to profile 100%
-  # of sampled transactions.
-  # We recommend adjusting this value in production.
-  profiles_sample_rate=1.0,
-  integrations=[sentry_logging]
-)
+from log import setup_sentry_and_logging
 
 """ This code will be executed once, before the application starts (and stops) receiving requests """
 @asynccontextmanager
@@ -48,8 +12,7 @@ async def lifespan(app: FastAPI):
   # on startup
   db_service = DatabaseService()
   scheduler = SchedulerService()
-  setup_logging()
-
+  setup_sentry_and_logging()
 
   yield 
 
@@ -81,7 +44,3 @@ app.include_router(jobs.router)
 @app.get("/")
 async def root():
   return {"message": "Hello World"}
-
-@app.get("/sentry-debug")
-async def trigger_error():
-  division_by_zero = 1 / 0
