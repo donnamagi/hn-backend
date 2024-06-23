@@ -23,11 +23,18 @@ sentry_logging = LoggingIntegration(
   event_level=logging.ERROR 
 )
 
+functions_to_trace = [
+  {"qualified_name": "app.services.background_tasks.process_articles.process_articles"},
+  {"qualified_name": "app.services.background_tasks.store_all_recents.update_scores"},
+]
+
 sentry_sdk.init(
   dsn=os.getenv("SENTRY_DSN"),
   # Set traces_sample_rate to 1.0 to capture 100%
   # of transactions for performance monitoring.
   traces_sample_rate=1.0,
+  enable_tracing=True,
+  functions_to_trace=functions_to_trace,
   # Set profiles_sample_rate to 1.0 to profile 100%
   # of sampled transactions.
   # We recommend adjusting this value in production.
