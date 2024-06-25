@@ -4,6 +4,10 @@ from app.models import Article
 from sqlalchemy.orm import Session
 from app.dependencies import get_session, MilvusService, get_milvus_session
 from datetime import datetime, timedelta
+from typing import List
+from pydantic import BaseModel
+
+router = APIRouter()
 
 router = APIRouter(prefix="/articles", tags=["articles"])
 
@@ -18,6 +22,30 @@ async def get_all(db: Session = Depends(get_session)):
       content={"message": f"Error: {e}"}
     )
 
+class ArticleRequest(BaseModel):
+  ids: List[int]
+
+@router.post("/")
+async def get_specific_articles(request: ArticleRequest, db: Session = Depends(get_session)):
+  try:
+    articles = db.query(Article).filter(Article.id.in_(request.ids)).all()
+
+    found_ids = {article.id for article in articles}
+    missing_ids = [id for id in request.ids if id not in found_ids]
+
+    return {
+      "message": "Data retrieved", 
+      "articles": articles, 
+      "missing_ids": missing_ids
+    }
+
+  except Exception as e:
+    return JSONResponse(
+      status_code=500,
+      content={"message": f"Error: {e}"}
+    )
+
+
 @router.get("/week")
 async def get_all_from_past_week(db: Session = Depends(get_session)):
   try:
@@ -29,7 +57,7 @@ async def get_all_from_past_week(db: Session = Depends(get_session)):
       status_code=500,
       content={"message": f"Error: {e}"}
     )
-  
+
 @router.get("/best")
 async def get_best(db: Session = Depends(get_session)):
   try:
