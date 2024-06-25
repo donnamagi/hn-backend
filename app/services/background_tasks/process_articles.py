@@ -34,6 +34,9 @@ def process_articles():
   for id in all_new_ids:
     article = get_article(id)
 
+    if article.score < 50:
+      continue
+
     if id in new_top_ids and id in new_best_ids:
         category = 12  # both
     elif id in new_top_ids:
