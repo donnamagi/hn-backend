@@ -88,7 +88,7 @@ async def get_article(article_id: int, milvus: MilvusService = Depends(get_milvu
         articles.append(article)
 
     if articles:
-      return {"message": "Article found", "article": articles}
+      return {"message": "Similar articles found", "articles": articles}
     else:
       return JSONResponse(
         status_code=404,
