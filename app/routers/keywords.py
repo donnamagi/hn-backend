@@ -5,6 +5,9 @@ from sqlalchemy.orm import Session
 from app.dependencies import get_session
 from datetime import datetime, timedelta
 from collections import Counter
+from fastapi.responses import JSONResponse
+from typing import List
+from pydantic import BaseModel
 
 router = APIRouter(prefix="/keywords", tags=["keywords"])
 
@@ -66,13 +69,28 @@ async def get_top_n_weekly(db: Session = Depends(get_session), n: int = 10):
       status_code=500,
       content={"message": f"Error: {e}"}
     )
-  
-@router.get("/{keyword}")
-async def get_matching_articles(db: Session = Depends(get_session), keyword: str = None):
+
+class KeywordRequest(BaseModel):
+  keywords: List[str]
+
+@router.post("/")
+async def get_specific_articles(request: KeywordRequest, db: Session = Depends(get_session)):
   try:
-    print(f"Searching for articles with keyword: {keyword}")
-    articles = db.query(Article).filter(Article.keywords.any(keyword)).all()
-    return {"message": "Data retrieved", "articles length": len(articles), "articles": articles}
+
+    articles = set()
+    for keyword in request.keywords:
+      query = db.query(Article).filter(Article.keywords.any(keyword)).all()
+      articles.update(query)
+
+    # recents first
+    articles = sorted(articles, key=lambda x: x.created_at, reverse=True)
+
+
+    return {
+      "message": "Data retrieved", 
+      "articles": articles, 
+    }
+
   except Exception as e:
     return JSONResponse(
       status_code=500,
