@@ -3,29 +3,15 @@ from fastapi.responses import JSONResponse
 from app.models import Article
 from sqlalchemy.orm import Session
 from app.dependencies import get_session, MilvusService, get_milvus_session
-from datetime import datetime, timedelta
 from typing import List
 from pydantic import BaseModel
 
-router = APIRouter()
-
 router = APIRouter(prefix="/articles", tags=["articles"])
-
-@router.get("/")
-async def get_all(db: Session = Depends(get_session)):
-  try:
-    articles = db.query(Article).all()
-    return {"message": "Data retrieved", "articles": articles}
-  except Exception as e:
-    return JSONResponse(
-      status_code=500,
-      content={"message": f"Error: {e}"}
-    )
 
 class ArticleRequest(BaseModel):
   ids: List[int]
 
-@router.post("/")
+@router.post("/", description="Returns a list of articles based on the provided IDs in the request body")
 async def get_specific_articles(request: ArticleRequest, db: Session = Depends(get_session)):
   try:
     articles = db.query(Article).filter(Article.id.in_(request.ids)).all()
@@ -43,51 +29,10 @@ async def get_specific_articles(request: ArticleRequest, db: Session = Depends(g
     return JSONResponse(
       status_code=500,
       content={"message": f"Error: {e}"}
-    )
+    ) 
 
-
-@router.get("/week")
-async def get_all_from_past_week(db: Session = Depends(get_session)):
-  try:
-    week = datetime.now() - timedelta(days=7)
-    articles = db.query(Article).filter(Article.created_at >= week).all()
-    return {"message": "Data retrieved", "articles": articles}
-  except Exception as e:
-    return JSONResponse(
-      status_code=500,
-      content={"message": f"Error: {e}"}
-    )
-
-@router.get("/best")
-async def get_best(db: Session = Depends(get_session)):
-  try:
-    articles = db.query(Article).filter(Article.category.in_([1, 12]))\
-              .order_by(Article.time.desc())\
-              .limit(500)\
-              .all()
-    return {"message": "Data retrieved", "articles": articles}
-  except Exception as e:
-    return JSONResponse(
-      status_code=500,
-      content={"message": f"Error: {e}"}
-    )
-
-@router.get("/top")
-async def get_top(db: Session = Depends(get_session)):
-  try:
-    articles = db.query(Article).filter(Article.category.in_([2, 12]))\
-                    .order_by(Article.time.desc())\
-                    .limit(500)\
-                    .all()
-    return {"message": "Data retrieved", "articles": articles}
-  except Exception as e:
-    return JSONResponse(
-      status_code=500,
-      content={"message": f"Error: {e}"}
-    )
-
-@router.get("/{article_id}")
-async def get_article(article_id: int, db: Session = Depends(get_session)):
+@router.get("/{article_id}", description="Gets a specific article by ID")
+async def get_one_article(article_id: int, db: Session = Depends(get_session)):
   try:
     article = db.query(Article).filter(Article.id == article_id).first()
     if article:
@@ -103,8 +48,8 @@ async def get_article(article_id: int, db: Session = Depends(get_session)):
       content={"message": f"Error: {e}"}
     )
 
-@router.get("/similar/{article_id}")
-async def get_article(article_id: int, milvus: MilvusService = Depends(get_milvus_session), db: Session = Depends(get_session)):
+@router.get("/similar/{article_id}", description="Gets similar articles based on a provided article ID")
+async def get_similar_articles(article_id: int, milvus: MilvusService = Depends(get_milvus_session), db: Session = Depends(get_session)):
   try:
     res = milvus.get_similar(id=article_id)
     res.pop(0) # first result == same article

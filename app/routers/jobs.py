@@ -4,7 +4,7 @@ from app.services.Scheduler import SchedulerService
 
 router = APIRouter(prefix="/jobs", tags=["jobs"])
 
-@router.get("/")
+@router.get("/", description="Shows upcoming scheduled jobs")
 async def get_all():
   try:
     jobs = SchedulerService().get_schedule()
