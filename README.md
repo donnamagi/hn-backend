@@ -1,12 +1,41 @@
 # Hacker News 2.0
 
-The objective of this capstone project was to create an improved version of Hacker News. This is the backend repository for the project. 
+The objective of this capstone project was to create an improved version of Hacker News. This is the backend repository for the project. [Frontend repository is here](https://github.com/donnamagi/hn-front).
 
-[Frontend is here](https://github.com/donnamagi/hn-front).
+# Application architecture
+
+![Flowchart - Application architecture](https://github.com/donnamagi/hn-backend/assets/79452941/6898b9ee-3973-4e32-9efa-e92ce6cea26b)
+
+### Tech Stack
+
+- **Frontend**: Built with **Next.js** and hosted on **Vercel**. Allowed me to work with both server-side rendered content and React components for a modern web UI.
+- **Backend**: Developed using **FastAPI** and Python, which facilitated data aggregation and working with the Zilliz SDK (a vector database common in data science)
+- **Databases**:
+  - **PostgreSQL**: Stores structured data such as article metadata and Hacker News state backups.
+  - **Zilliz**: Manages vector data for embedded semantic context, enabling similarity search.
+ 
+In this case, a lot of the application logic sits in the frontend. This enabled me to render faster visual updates for the user without complicating the communication between client and server, and made UX-driven development quicker. However, the backend was still crucial for its scheduled processing tasks and communication with external dependencies.
+
+### API Dependencies
+- [Hacker News API](https://github.com/HackerNews/API): Fetches data for content aggregation, and helps maintain consistency with the real-time content on Hacker News.
+-  [Voyage AI API](https://www.voyageai.com): Provides embeddings for semantic search and recommendations. Voyage was, at the time of this project, the industry leader in large text embeddings. I chose to integrate their API as part of my data preprocessing workflow. 
+- [Groq API](https://wow.groq.com/why-groq/): Handles text synthesis for summarizing articles.
+
+### Sentry
+
+Both the front- and backend are using the Sentry SDK to allow simplified error management and performance analysis. This allowed me as the developer to be notified when scripts failed or queries were getting slow.
+
+
+### Deployment
+
+The backend was containerized and deployed on AWS, using [AWS Elastic Beanstalk](https://aws.amazon.com/elasticbeanstalk/). Using Elastic Beanstalk (and their CLI tooling) allowed for simple and efficient deployment cycles, and facilitated processes like health checks and graceful handling of failed deploys. 
+
+I also utilized [AWS RDS (PostgreSQL)](https://aws.amazon.com/rds/) for managing the database. As this was also an AWS service, I was able to host them in the same 'Virtual Private Cloud' (VPC) which facilitated security and communication speed between the backend and the database.
+
 
 # Development Setup
 
-This is a guide on how to set up and run this FastAPI project using Uvicorn (an ASGI server). 
+This is a guide on how to set up and run this FastAPI project using Uvicorn (an ASGI server). As mentioned above, many external dependencies are included and need to be (re)configured for the app to successfully start.
 
 ## Prerequisites
 
@@ -63,11 +92,11 @@ You might want to start by creating an `.env` file based on `.env.example`
 
 ### Zilliz - vector DB
 
-This project setup heavily depends on a cloud vector database called [Zilliz](https://zilliz.com). Successfully running many of the scripts requires [setting up Zilliz](https://docs.zilliz.com/docs/quick-start) or reconfiguring for a different data storage method.
+This project setup heavily depends on a cloud vector database called [Zilliz](https://zilliz.com). Successfully running the app requires [setting up Zilliz](https://docs.zilliz.com/docs/quick-start) and adding the credentials in `.env`.
 
 ### PostgreSQL – relational DB
 
-This code talks directly to a relational PostgreSQL database hosted on AWS RDS (a t3.micro instance, the free tier option).
+This code talks directly to a hosted database on AWS RDS (a t3.micro instance, the free tier option).
 
 Necessary setup on AWS is explained in [this setup guide](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.PostgreSQL.html#CHAP_GettingStarted.Connecting.PostgreSQL). After obtaining the necessary credentials from the AWS Console, set the values in `.env` and you should be good to go.
 
@@ -75,7 +104,7 @@ However – there are many other ways to work with a PostgreSQL database. **Usin
 
 ### Voyage - embeddings 
 
-[Voyage AI](https://www.voyageai.com) was, at the time of this project, the industry leader in large text embeddings. I chose to integrate their API as part of my data preprocessing workflow. Setup instructions [here](https://docs.voyageai.com/docs/api-key-and-installation).
+Obtain an API key [here](https://docs.voyageai.com/docs/api-key-and-installation).
 
 ### Llama 3 - text synthesis
 
