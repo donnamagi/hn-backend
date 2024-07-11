@@ -12,7 +12,20 @@ from sqlalchemy import desc
 
 router = APIRouter(prefix="/keywords", tags=["keywords"])
 
-@router.get("/top/{n}")
+# helper function to count keyword occurrences from db query returns
+def count_keyword_occurrences(query):
+  keywords = [row[0] for row in query]
+
+  flat_keywords = [
+    keyword
+    for sublist in keywords
+    for keyword in sublist
+  ]
+
+  return Counter(flat_keywords)
+
+
+@router.get("/top/{n}", description="Gets the top n keywords from the last 300 articles")
 async def get_top_n(db: Session = Depends(get_session), n: int = 10):
   try:
     query = (
@@ -22,15 +35,10 @@ async def get_top_n(db: Session = Depends(get_session), n: int = 10):
       .limit(300)
       .all()
     )
-    keywords = [row[0] for row in query]
+    
+    counted_keywords = count_keyword_occurrences(query)
 
-    flat_keywords = [
-      keyword
-      for sublist in keywords
-      for keyword in sublist
-    ]
-
-    top_keywords = Counter(flat_keywords).most_common(n)
+    top_keywords = counted_keywords.most_common(n)
     keys_only = [key for key, _ in top_keywords]
 
     return {"message": "Data retrieved", "top_keywords": keys_only}
@@ -40,7 +48,7 @@ async def get_top_n(db: Session = Depends(get_session), n: int = 10):
       content={"message": f"Error: {e}"}
     )
 
-@router.get("/top-weekly/{n}")
+@router.get("/top-weekly/{n}", description="Gets a time series analysis of keyword occurrences per week")
 async def get_top_n_weekly(db: Session = Depends(get_session), n: int = 10):
   try:
     end_date = datetime.now()
@@ -61,15 +69,7 @@ async def get_top_n_weekly(db: Session = Depends(get_session), n: int = 10):
       if not query:
         break
 
-      keywords = [row[0] for row in query]
-
-      flat_keywords = [
-        keyword
-        for sublist in keywords
-        for keyword in sublist
-      ]
-
-      keyword_counts = Counter(flat_keywords)
+      keyword_counts = count_keyword_occurrences(query)
 
       keyword_occurrences[start_date] = keyword_counts.most_common(n)
 
@@ -85,7 +85,7 @@ async def get_top_n_weekly(db: Session = Depends(get_session), n: int = 10):
 class KeywordRequest(BaseModel):
   keywords: List[str]
 
-@router.post("/")
+@router.post("/", description="Fetches articles that contain any of the specified keywords.")
 async def get_specific_articles(request: KeywordRequest, db: Session = Depends(get_session)):
   try:
 
