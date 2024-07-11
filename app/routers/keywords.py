@@ -91,12 +91,14 @@ async def get_specific_articles(request: KeywordRequest, db: Session = Depends(g
 
     articles = set()
     for keyword in request.keywords:
-      query = db.query(Article).filter(Article.keywords.any(keyword)).all()
+      query = (
+        db.query(Article)
+        .filter(Article.keywords.any(keyword))
+        .order_by(desc(Article.time))
+        .limit(100)
+        .all()
+      )
       articles.update(query)
-
-    # recents first
-    articles = sorted(articles, key=lambda x: x.created_at, reverse=True)
-
 
     return {
       "message": "Data retrieved", 
