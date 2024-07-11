@@ -6,6 +6,7 @@ from app.routers import jobs, articles, keywords
 from app.dependencies import DatabaseService
 from app.services.Scheduler import SchedulerService
 from app.log import setup_sentry_and_logging
+import os
 
 
 """ This code will be executed once, before the application starts (and stops) receiving requests """
@@ -27,16 +28,15 @@ app = FastAPI(lifespan=lifespan)
 origins = [
     "http://localhost:3000",
     "https://hackernews.news",
-    "https://www.hackernews.news",
-    "https://hn-front.vercel.app",
+    "https://www.hackernews.news"
 ]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST"],
+    allow_headers=[],
 )
 
 app.include_router(articles.router)
