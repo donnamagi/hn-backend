@@ -8,13 +8,20 @@ from collections import Counter
 from fastapi.responses import JSONResponse
 from typing import List
 from pydantic import BaseModel
+from sqlalchemy import desc
 
 router = APIRouter(prefix="/keywords", tags=["keywords"])
 
 @router.get("/top/{n}")
 async def get_top_n(db: Session = Depends(get_session), n: int = 10):
   try:
-    query = db.query(Article.keywords).filter(Article.keywords != None).all()
+    query = (
+      db.query(Article.keywords)
+      .filter(Article.keywords.isnot(None))
+      .order_by(desc(Article.created_at))
+      .limit(300)
+      .all()
+    )
     keywords = [row[0] for row in query]
 
     flat_keywords = [
@@ -24,8 +31,9 @@ async def get_top_n(db: Session = Depends(get_session), n: int = 10):
     ]
 
     top_keywords = Counter(flat_keywords).most_common(n)
+    keys_only = [key for key, _ in top_keywords]
 
-    return {"message": "Data retrieved", "top_keywords": top_keywords}
+    return {"message": "Data retrieved", "top_keywords": keys_only}
   except Exception as e:
     return JSONResponse(
       status_code=500,
@@ -40,11 +48,15 @@ async def get_top_n_weekly(db: Session = Depends(get_session), n: int = 10):
 
     while True:
       start_date = end_date - timedelta(days=7)
-      query = db.query(Article.keywords).filter(
-        Article.keywords != None,
-        Article.created_at >= start_date,
-        Article.created_at < end_date
-      ).all()
+      query = (
+        db.query(Article.keywords)
+        .filter(
+          Article.keywords.isnot(None),
+          Article.created_at >= start_date,
+          Article.created_at < end_date
+        )
+        .all()
+      )
 
       if not query:
         break
