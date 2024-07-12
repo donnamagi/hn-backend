@@ -16,6 +16,24 @@ The objective of this capstone project was to create an improved version of Hack
  
 In this case, a lot of the application logic sits in the frontend. This enabled me to render faster visual updates for the user without complicating the communication between client and server, and made UX-driven development quicker. However, the backend was still crucial for its scheduled processing tasks and communication with external dependencies.
 
+### Data aggregation methodology
+A systematic process was employed to collect and process articles from Hacker News. The methodology involved:
+
+
+| **Step**                | **Description**                                                                                                                                                   |
+|-------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Daily Article Retrieval** | The top 30 trending and best articles from Hacker News were retrieved on a daily basis.                                                                           |
+| **Metadata Collection**     | Associated metrics, comments, and other relevant data were extracted from Hacker News.                                                                            |
+| **Content Acquisition**     | The content of each article was retrieved from their respective source.                                                                                           |
+| **Content Processing**      | The article content was cleaned and synthesized using Llama 3-70b, a Large Language Model (LLM).                                                                  |
+| **Entity Extraction**       | Mentions of organizations and topics (referred to as "keywords" in the dataset) were extracted from the processed content.                                        |
+| **Embedding Generation**    | Vector embeddings were created from the processed content, enabling further analysis and modeling.                                                                |
+| **Data Storage**            | The processed data was stored for further analysis and visualization.                                                                                            |
+
+
+#### Entity Relationship Diagram
+![Entity Relationship Diagram - ER diagram-2](https://github.com/user-attachments/assets/bd47541a-2729-48b4-9e56-76b181274b5b)
+
 ### API Dependencies
 - [Hacker News API](https://github.com/HackerNews/API): Fetches data for content aggregation, and helps maintain consistency with the real-time content on Hacker News.
 -  [Voyage AI API](https://www.voyageai.com): Provides embeddings for semantic search and recommendations. Voyage was, at the time of this project, the industry leader in large text embeddings. I chose to integrate their API as part of my data preprocessing workflow. 
@@ -25,13 +43,11 @@ In this case, a lot of the application logic sits in the frontend. This enabled 
 
 Both the front- and backend are using the Sentry SDK to allow simplified error management and performance analysis. This allowed me as the developer to be notified when scripts failed or queries were getting slow.
 
-
 ### Deployment
 
 The backend was containerized and deployed on AWS, using [AWS Elastic Beanstalk](https://aws.amazon.com/elasticbeanstalk/). Using Elastic Beanstalk (and their CLI tooling) allowed for simple and efficient deployment cycles, and facilitated processes like health checks and graceful handling of failed deploys. 
 
 I also utilized [AWS RDS (PostgreSQL)](https://aws.amazon.com/rds/) for managing the database. As this was also an AWS service, I was able to host them in the same 'Virtual Private Cloud' (VPC) which facilitated security and communication speed between the backend and the database.
-
 
 # Development Setup
 
