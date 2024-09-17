@@ -10,25 +10,28 @@ import os
 
 
 """ This code will be executed once, before the application starts (and stops) receiving requests """
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-  # on startup
-  setup_sentry_and_logging()
-  db_service = DatabaseService()
-  scheduler = SchedulerService()
+    # on startup
+    setup_sentry_and_logging()
+    db_service = DatabaseService()
+    scheduler = SchedulerService()
 
-  yield 
+    yield
 
-  # on shutdown
-  db_service.engine.dispose()
-  await scheduler.stop()
+    # on shutdown
+    db_service.engine.dispose()
+    await scheduler.stop()
+
 
 app = FastAPI(lifespan=lifespan)
 
 origins = [
     "http://localhost:3000",
     "https://hackernews.news",
-    "https://www.hackernews.news"
+    "https://www.hackernews.news",
 ]
 
 app.add_middleware(
@@ -43,6 +46,7 @@ app.include_router(articles.router)
 app.include_router(keywords.router)
 app.include_router(jobs.router)
 
+
 @app.get("/")
 async def root():
-  return {"message": "Hello World"}
+    return {"message": "Hello World"}

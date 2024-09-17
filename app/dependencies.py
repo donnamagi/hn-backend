@@ -14,153 +14,155 @@ import logging
 
 load_dotenv()
 
+
 class DatabaseService:
-  _instance = None
-  _lock = threading.Lock()
+    _instance = None
+    _lock = threading.Lock()
 
-  def __new__(cls, *args, **kwargs):
-    if not cls._instance:
-      logging.info("Creating new DB instance")
-      with cls._lock:
+    def __new__(cls, *args, **kwargs):
         if not cls._instance:
-          cls._instance = super(DatabaseService, cls).__new__(cls, *args, **kwargs)
-    return cls._instance
+            logging.info("Creating new DB instance")
+            with cls._lock:
+                if not cls._instance:
+                    cls._instance = super(DatabaseService, cls).__new__(
+                        cls, *args, **kwargs
+                    )
+        return cls._instance
 
-  def __init__(self):
-    if hasattr(self, 'initialized') and self.initialized:
-      return
-    logging.info("Initializing DB")
-    self.secret = self._get_secret()
-    self.engine = self._connect_to_db()
-    self.Session = orm.sessionmaker(
-      bind=self.engine,
-      autocommit=False,
-      autoflush=False
-      )
-    Base.metadata.create_all(self.engine)
-    self.initialized = True
+    def __init__(self):
+        if hasattr(self, "initialized") and self.initialized:
+            return
+        logging.info("Initializing DB")
+        self.secret = self._get_secret()
+        self.engine = self._connect_to_db()
+        self.Session = orm.sessionmaker(
+            bind=self.engine, autocommit=False, autoflush=False
+        )
+        Base.metadata.create_all(self.engine)
+        self.initialized = True
 
-  def _get_secret(self):
-    secret_name = os.getenv("AWS_RDS_SECRET")
-    region_name = "eu-north-1"
+    def _get_secret(self):
+        secret_name = os.getenv("AWS_RDS_SECRET")
+        region_name = "eu-north-1"
 
-    # Create a Secrets Manager client
-    session = boto3.session.Session()
-    client = session.client(
-      service_name='secretsmanager',
-      region_name=region_name,
-      aws_access_key_id=os.getenv("AWS_ACCESS_KEY"),
-      aws_secret_access_key=os.getenv("AWS_SECRET_KEY")
-    )
+        # Create a Secrets Manager client
+        session = boto3.session.Session()
+        client = session.client(
+            service_name="secretsmanager",
+            region_name=region_name,
+            aws_access_key_id=os.getenv("AWS_ACCESS_KEY"),
+            aws_secret_access_key=os.getenv("AWS_SECRET_KEY"),
+        )
 
-    try:
-      get_secret_value_response = client.get_secret_value(
-        SecretId=secret_name
-      )
-    except ClientError as e:
-      # For a list of exceptions thrown, see
-      # https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
-      raise e
+        try:
+            get_secret_value_response = client.get_secret_value(SecretId=secret_name)
+        except ClientError as e:
+            # For a list of exceptions thrown, see
+            # https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
+            raise e
 
-    secret = get_secret_value_response['SecretString']
-    return json.loads(secret)
+        secret = get_secret_value_response["SecretString"]
+        return json.loads(secret)
 
-  def _connect_to_db(self):
-    db_host = os.getenv("AWS_HOST")
-    db_port = 5432
-    db_user = self.secret['username']
-    db_password = self.secret['password']
+    def _connect_to_db(self):
+        db_host = os.getenv("AWS_HOST")
+        db_port = 5432
+        db_user = self.secret["username"]
+        db_password = self.secret["password"]
 
-    if not all([db_host, db_port, db_user, db_password]):
-      logging.info("Missing database connection parameters.")
-      return None
+        if not all([db_host, db_port, db_user, db_password]):
+            logging.info("Missing database connection parameters.")
+            return None
 
-    try:
-      connection_string = f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/postgres'
-      engine = create_engine(connection_string, pool_pre_ping=True)
-      return engine
-    except Exception as e:
-      logging.info(f"Error connecting to the database: {e}")
-      return None
+        try:
+            connection_string = (
+                f"postgresql://{db_user}:{db_password}@{db_host}:{db_port}/postgres"
+            )
+            engine = create_engine(connection_string, pool_pre_ping=True)
+            return engine
+        except Exception as e:
+            logging.info(f"Error connecting to the database: {e}")
+            return None
 
 
 class MilvusService:
-  _instance = None
-  _lock = threading.Lock()
-  def __new__(cls, *args, **kwargs):
-    if not cls._instance:
-      logging.info("Creating new Milvus instance")
-      with cls._lock:
+    _instance = None
+    _lock = threading.Lock()
+
+    def __new__(cls, *args, **kwargs):
         if not cls._instance:
-          cls._instance = super(MilvusService, cls).__new__(cls, *args, **kwargs)
-    return cls._instance
+            logging.info("Creating new Milvus instance")
+            with cls._lock:
+                if not cls._instance:
+                    cls._instance = super(MilvusService, cls).__new__(
+                        cls, *args, **kwargs
+                    )
+        return cls._instance
 
-  def __init__(self):
-    if hasattr(self, 'initialized') and self.initialized:
-      return
-    logging.info("Initializing Milvus")
-    self.client = MilvusClient(
-      uri=os.getenv("MILVUS_CLUSTER_ENDPOINT"),
-      token=os.getenv("MILVUS_API_KEY")
-    )
-    self.collection_name = 'HackerNews'
-    self.initialized = True
+    def __init__(self):
+        if hasattr(self, "initialized") and self.initialized:
+            return
+        logging.info("Initializing Milvus")
+        self.client = MilvusClient(
+            uri=os.getenv("MILVUS_CLUSTER_ENDPOINT"), token=os.getenv("MILVUS_API_KEY")
+        )
+        self.collection_name = "HackerNews"
+        self.initialized = True
 
-  def insert(self, data):
-    return self.client.insert(
-      collection_name=self.collection_name,
-      data=data
-    )
-  
-  def search_vector(self, vectors, fields=['id'], limit=5):
-    return self.client.search(
-      collection_name=self.collection_name,
-      data=vectors,
-      filter="content != ''",
-      output_fields=fields,
-      limit=limit
-    )[0]
-  
-  def search_id(self, id):
-    return self.client.query(
-      collection_name=self.collection_name,
-      filter=f"id == {id}",
-      output_fields=["id", "vector"],
-      limit=1
-    )
-  
-  def get_similar(self, id):
-    return self.client.search(
-      collection_name=self.collection_name,
-      data=[self.search_id(id)[0]['vector']],
-      filter="content != ''",
-      output_fields=["id"],
-      limit=6
-    )[0]
+    def insert(self, data):
+        return self.client.insert(collection_name=self.collection_name, data=data)
+
+    def search_vector(self, vectors, fields=["id"], limit=5):
+        return self.client.search(
+            collection_name=self.collection_name,
+            data=vectors,
+            filter="content != ''",
+            output_fields=fields,
+            limit=limit,
+        )[0]
+
+    def search_id(self, id):
+        return self.client.query(
+            collection_name=self.collection_name,
+            filter=f"id == {id}",
+            output_fields=["id", "vector"],
+            limit=1,
+        )
+
+    def get_similar(self, id):
+        return self.client.search(
+            collection_name=self.collection_name,
+            data=[self.search_id(id)[0]["vector"]],
+            filter="content != ''",
+            output_fields=["id"],
+            limit=6,
+        )[0]
+
 
 @contextmanager
 def get_db():
-  db_service = DatabaseService()
-  session = db_service.Session()
-  logging.info("Session created")
-  try:
-    yield session
-  finally:
-    session.close()
+    db_service = DatabaseService()
+    session = db_service.Session()
+    logging.info("Session created")
+    try:
+        yield session
+    finally:
+        session.close()
 
 
 def get_session():
-  db_service = DatabaseService()
-  db = db_service.Session()
-  try:
-    yield db
-  finally:
-    db.close()
+    db_service = DatabaseService()
+    db = db_service.Session()
+    try:
+        yield db
+    finally:
+        db.close()
+
 
 def get_milvus_session():
-  milvus = MilvusService()
-  try:
-    yield milvus
-  finally:
-    # milvus.close()
-    pass
+    milvus = MilvusService()
+    try:
+        yield milvus
+    finally:
+        # milvus.close()
+        pass
