@@ -9,9 +9,6 @@ from fastapi.responses import JSONResponse
 from typing import List
 from pydantic import BaseModel
 from sqlalchemy import desc
-from app.services.scrape import ProcessService
-from app.services.audio import AudioService
-
 
 router = APIRouter(prefix="/keywords", tags=["keywords"])
 
@@ -110,46 +107,6 @@ async def get_specific_articles(
             "message": "Data retrieved",
             "articles": articles,
         }
-
-    except Exception as e:
-        return JSONResponse(status_code=500, content={"message": f"Error: {e}"})
-
-
-class KeywordRequest(BaseModel):
-    keywords: List[str]
-
-
-@router.post(
-    "/recap",
-    description="Makes a personalized audio recap of the articles that contains specified topics.",
-)
-async def make_recap(
-    request: KeywordRequest,
-    db: Session = Depends(get_session),
-    scrape_service: ProcessService = Depends(ProcessService),
-    audio_service: AudioService = Depends(AudioService),
-):
-    try:
-
-        articles = []
-        for keyword in request.keywords:
-
-            two_weeks = datetime.now() - timedelta(weeks=2)
-            query = (
-                db.query(Article)
-                .filter(Article.keywords.any(keyword))
-                .filter(Article.time >= two_weeks)
-                .order_by(desc(Article.time))
-                .limit(10)
-                .all()
-            )
-            articles.extend(query)
-        content = [(article.content_summary, article.title) for article in articles]
-
-        recap = scrape_service.get_recap(content)
-        filename = audio_service.tts_to_file(recap)
-
-        return FileResponse(filename, media_type="audio/mpeg", filename="recap.mp3")
 
     except Exception as e:
         return JSONResponse(status_code=500, content={"message": f"Error: {e}"})

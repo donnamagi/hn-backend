@@ -39,21 +39,6 @@ class ProcessService:
         reply = chat_completion.choices[0].message.content
         return clean_llm_text(reply)
 
-    def get_recap(self, content: str) -> str:
-        content = [f"{title} - {summary}" for summary, title in content]
-        chat_completion = self.groq_client.chat.completions.create(
-            messages=[
-                {
-                    "role": "user",
-                    "content": f"Summarize the articles into an overview of recent trending articles on Hacker News. Articles are already summarized, your job is to present them. Make clear references to each article and technology mentioned. Answer in plain text. Here are the recent news: {content}",
-                }
-            ],
-            model="llama-3.1-70b-versatile",
-        )
-
-        reply = chat_completion.choices[0].message.content
-        return clean_llm_text(reply)
-
     def get_keywords(self, summary: str) -> str:
         try:
             chat_completion = self.groq_client.chat.completions.create(
@@ -81,24 +66,28 @@ class ProcessService:
         result = self.embeddings_client.embed(summary, model="voyage-2")
         return result.embeddings[0]
 
+    def add_summary(self, article: dict) -> str:
+        if "text" in article:
+            summary = self.get_summary(article["text"])
+        else:
+            content = self.get_content(article["url"])
+            summary = self.get_summary(content) if content else None
+        article["content_summary"] = summary
+        return article
+
     def process_article(self, article: dict) -> dict:
         try:
             article["time"] = datetime.fromtimestamp(article["time"], timezone.utc)
 
-            if "text" in article:
-                summary = self.get_summary(article["text"])
-            else:
-                content = self.get_content(article["url"])
-                summary = self.get_summary(content) if content else None
+            article = self.add_summary(article)
 
-            if summary and len(summary) > 0:
-                keywords = self.get_keywords(summary)
-                embedding = self.get_embedding(summary)
+            if article["content_summary"] and len(article["content_summary"]) > 0:
+                keywords = self.get_keywords(article["content_summary"])
+                embedding = self.get_embedding(article["content_summary"])
             else:
                 keywords = None
                 embedding = self.get_embedding(article["title"])
 
-            article["content_summary"] = summary
             article["keywords"] = keywords
             article["vector"] = embedding
 
