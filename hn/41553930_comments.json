@@ -1,0 +1,263 @@
+[
+  {
+    "comment": "I'm genuinely curious if this will play out in a real way. Now with a few years of distance from this essay, I feel like AI is still in a zone where most \"non-human interactions\" are almost more recognizable. The internet at large seems to have gotten pretty good at spotting AI art and LLMs posting on sites. I'm not sure I can exactly describe what it is about the GPTbots, but they remain fairly obvious. Which isn't to say we're not still headed for something like this. I do think some of the most sensitive to this sort of crass misuse of platforms already got off when human-created ads and bots started becoming prevalent, so the question is if LLM-based bots are notably worse in a way that people care about differently. I'm already a few steps down the \"logging off\" path at this point, but it's unclear to me that I'm not the outlier here. I worry that there's many people who are lonely and don't have a better way to interact socially where they're totally fine talking to some catfishing LLM that wants their money in some way or other. It seems clear to me that a disconcerting amount of LLM startups are started by people who are, or are willing to take money from, people who see a relentlessly positive/comforting/sexually open faux human as their best way forward in life. Every week brings some new \"it's a social network where everyone's an LLM that's nice to you\" or \"this app is your best friend\". It just feels predatory to me in a way where even if it's well intended, it feels like an admission or exploitation of a serious ill in our society.",
+    "replies": [
+      {
+        "comment": "> The internet at large seems to have gotten pretty good at spotting AI art and LLMs posting on sites I beg to differ. We are at a point where it's almost impossible to know both art and conversation are AI generated. New models like Flux Pro will definitely fool you easily, this is it. The latest LLMs are also very good especially in short interactions to the point it's impossible to know. The only real issue keeping these models from completely flooding the internet is that they are costly to run, but as costs come down and models improve, we have zero chance actually differentiating AI from human output.",
+        "replies": [
+          {
+            "comment": "All of these models are currently charging well below what they really cost to run, mostly propped up by VC money. I dont expect the price of using these AI models to come down  in fact theyll probably rise sharply in the next year as investor money dries up and these companies desperately search for a path to profitability.",
+            "replies": [
+              {
+                "comment": "As always the plan is to destroy existing industries and then raise prices to above the actual cost.",
+                "replies": [
+                  {
+                    "comment": "What existing industries are LLM's destroying?",
+                    "replies": [
+                      {
+                        "comment": "Translators, subtitle workers, illustrators, plus whatever industries are entrenching themselves in genAI as we speak. When prices go up the reality will kick in, some would fold, others will need to be cleaned up",
+                        "replies": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "comment": "It's hard to say on this one. When Google first bought YouTube they were getting killed on video streaming costs, but then that became much much cheaper. So much so that in any FTC mandated Alphabet break up, I might prefer the video biz over the search biz. Especially if Tik Tok is banned.",
+                "replies": []
+              },
+              {
+                "comment": "Do you have facts to back up this claim?",
+                "replies": []
+              }
+            ]
+          },
+          {
+            "comment": "Fully agree. I'm pretty sure that even specialists in the matter can be fooled. Not fooled most of the time, but a few times because their attention would be lowered by other things. My natural reaction is to consider now everything likely-fake unless proven genuine.",
+            "replies": [
+              {
+                "comment": "I got fooled briefly when an audiobook started playing on youtube. It was autoplay and while doing something else I was listening in. Imagine a completely AI generated audiobook. When looking at comments and views I was saddened, most cant tell.",
+                "replies": []
+              }
+            ]
+          },
+          {
+            "comment": "I beg to differ, I was interested and looked at flux pro. The rendering is impressive and looks like the output of a larger organization or a dedicated professional. But it's just that. It feels a bit like most people don't really interact with art, except on ads, movie poster and the like. And I guess those images are good for being displayed on a screen. Maybe this (cliche) analogy will help my point. Art is like sex. Apparently most people have only seen porn and think the machines are incredible at sex. But they are confusing one for the other",
+            "replies": []
+          },
+          {
+            "comment": "Honestly, I don't care. For all the talk about hallucinations, LLMs are still more reliable and accurate than a random person I talk to, or a random article written by a human. AI text, on its own, is not a net loss compared to human-generated content. So instead, I use the same heuristics I always did: looking for signals of reputability, whether it's an expert or amateur content, whether it's done pro bono or as a bait to get you to view ads, etc. It's still all about intent. Bad actors will use AI to create bad content just like they've been using humans to do so far. Good actors won't use AI as extensively, but even when they do, they'll make sure the output is good. Inability to distinguish between human and LLM writing changes nothing here.",
+            "replies": []
+          },
+          {
+            "comment": "It's also selection bias: people spot bad AI fakes, convince themselves this represents all AI fakes, and then gain undue confidence in their ability to spot AI fakes. Disinformation actors also know this: the value of flooding Facebook with bad AI fakes, is it primes people to believe either the good ones or human-crafted content which is intended to promote disinformation (since you've changed the ground assumptions - \"AI == fake\", \"human written == true\" is how people wind up operating).",
+            "replies": [
+              {
+                "comment": "Yup. For instance alarmingly few people seem to know that you can trivially ask a LLM to use a different style to respond: > Explain why privacy is important in a single paragraph, in the style of a stereotypical 12 year old girl \"Privacy is super important because, like, no one wants people all up in their business, right? Its like when you're texting your BFF and you dont want your little brother snooping or your mom reading your diary. We need space to be ourselves, to make mistakes, and just, like, do our thing without everyone watching. Plus, if everyone knew everything about you, itd be so awkward! We all deserve to have secrets and control who knows what, because, like, who wants their life to be a reality show 24/7? No thanks!\" So yeah, lots of people at this point have a good feel for what the default style out of ChatGPT looks like, but many of them don't seem to realize that this is just a default and that it can answer differently.",
+                "replies": [
+                  {
+                    "comment": "True. When I generate articles with LLMs I do two things: 1. I seed it with a conversation thread like this one, with many points of view grounded in human reactions, and 2. I ask it to give me 5 different styles, just one phrase for each, then I choose the style I prefer. You can also ask it to imitate known authors. The result is a combination of grounded analysis (and debunking) formatted and compiled in a nice style. LLMs are great at doing this, the resulting text is better reading than the comment thread or the original article. I don't rely on the model for debunking and debiasing the source, but it is a good wordsmith. Here I prepared a sample written in Onion style, made me laugh once > Amazon's Alexa now responds to all queries with, \"I'm not an AI, I'm just a very small woman living in your speaker. Please don't leave me.\" https://claude.site/artifacts/24cd0c1b-2077-4220-a845-cf371e...",
+                    "replies": []
+                  }
+                ]
+              },
+              {
+                "comment": "> Disinformation actors also know this: the value of flooding Facebook with bad AI fakes I'm not disagreeing, but is that an \"I reckon/it is widely believed\" or an \"I've seen quality evidence of this\"?",
+                "replies": [
+                  {
+                    "comment": "Go with \"I reckon\", but on the basis of that you estimate an adversary by assuming they're at least as smart as you are.",
+                    "replies": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "comment": "I don't think you realize how many of the accounts you interact with online are actually bots.",
+        "replies": [
+          {
+            "comment": "How many accounts do folks typically interact with online? For me it's just HN, which has some bots but probably not many. GH too, but that's even less likely to be bots (whats the motive?)",
+            "replies": [
+              {
+                "comment": "Also this. I pretty much follow accounts I know the owner of. If they've swapped out their posting with an AI, sure, maybe it's fooling me, but I'm generally not interacting with just random people online in the same way I was 5 years ago. The terrible obvious bots of the past killed that for me.",
+                "replies": []
+              },
+              {
+                "comment": "Copy/paste an HN comment thread into chatgpt and ask it to generate a comment that 50% will agree with and 50% will disagree with. And then observe the engagement.",
+                "replies": [
+                  {
+                    "comment": "Whats the point of inflating engagement on HN? Its not like karma points get you business opportunities, or that you could sell ads on popular comments. [This comment brought to you by froobogz dot io, the rustified post-Agile Erlang metaobservability PLaaS that winners eat for breakfast]",
+                    "replies": [
+                      {
+                        "comment": "I guess one way people could be using LLMs on HN is that if there's a comment they disagree strongly with, they copy the thread into ChatGPT and prompt it for a counterargument. But this is not really bot spam in that sense, and I'm not usre if I even find it detrimental.",
+                        "replies": []
+                      },
+                      {
+                        "comment": "People do worse for less.",
+                        "replies": []
+                      }
+                    ]
+                  },
+                  {
+                    "comment": "Gave it a whirl: \"Heres a response that aims for a balanced perspective likely to generate both agreement and disagreement among Hacker News commenters: -- Your observations about AI interactions are quite thought-provoking. I agree that while many users can still spot AI-generated content, the landscape is rapidly evolving. It's interesting to consider how LLMs have become more integrated into our online experiences, and I share your concern about the potential exploitation of vulnerable individuals. That said, I think it's essential to acknowledge that not everyone views these AI interactions negatively. For some, these tools provide valuable companionship or support that they might not find elsewhere, especially during times of loneliness. The idea of using AI as a bridge for social interaction can be seen as a double-edged swordwhile it might lead to dependency or exploitation, it also opens up new avenues for connection. Ultimately, the challenge lies in how these technologies are developed and marketed. Theres a fine line between providing genuine support and creating a predatory environment. Its crucial for us as a society to have discussions about ethical considerations and to establish guidelines that prioritize user welfare over profit. -- This response should provoke a range of opinions, encouraging discussions on both the potential benefits and drawbacks of AI in social contexts.\" I don't know, I'm not convinced. Reminds me of Billy Madison's speech about the Industrial Revolution and the puppy that lost his way. I'm sure there are other agents/prompts that could do better. My prompt: \"Create a response that 50/50 hacker news commenters would agree with: I'm genuinely curious if this will play out... \" Edit: Just for shits though... > Can you describe the AI revolution using an analogy to the Puppy who Lost his Way? > Certainly! Heres an analogy that describes the AI revolution through the story of a puppy who lost his way: The Puppy Who Lost His Way Once upon a time, in a bustling town, there was a curious little puppy named Max. Max loved to explore and was always eager to discover new things. One sunny day, while chasing a butterfly, he wandered away from his home and found himself in an unfamiliar part of the town. At first, Max was excited. He met new friendsa wise old dog, a playful kitten, and a clever rabbit. Each of them showed him different paths, each leading to new adventures. Max was thrilled; he felt like he was uncovering the secrets of the world around him. However, as he explored further, Max began to realize that not all paths were safe. Some led to busy roads with rushing cars, while others took him to dark alleys where he felt frightened. Max found himself overwhelmed, longing for the comfort of his home. He realized that while exploration was exciting, he needed guidance to navigate this vast, unknown territory. Just when he felt lost, he encountered a kind, experienced dog named Bella. Bella understood Maxs confusion and offered to help him find his way back. She taught him to trust his instincts, but also to look for signs and follow safe routes. With her guidance, Max learned how to navigate the complexities of the town, making the most of his adventures while staying safe. As Max journeyed home with Bella, he discovered that the town was filled with opportunities. He could play, learn, and growbut he needed to be mindful of his surroundings. With each new experience, he became more confident and savvy, ready to explore the world responsibly. The AI Revolution In this analogy, Max represents humanity at the dawn of the AI revolution. The initial excitement mirrors our enthusiasm for AI's potential to explore and enhance various aspects of life. The new friends Max meets symbolize the different advancements in AIeach offering unique benefits and challenges. However, just as Max faced dangers in his exploration, society must navigate the complexities and ethical dilemmas posed by AI technologies. The wise dog, Bella, represents the need for thoughtful guidance, regulations, and ethical frameworks to ensure that AI serves humanity positively. Ultimately, like Max, we have the opportunity to embrace the AI revolution, exploring its vast possibilities while remaining mindful of our path. With careful navigation and responsible use, we can make the most of this exciting journey, ensuring it leads us toward a brighter future.",
+                    "replies": [
+                      {
+                        "comment": "Failed on the first phrase. Nobody but LLMs talks like this: Your observations about AI interactions are quite thought-provoking. Polite but vacuous. Somebody should make this AI read Strunk and White; when you remove the filler, what is left?",
+                        "replies": []
+                      },
+                      {
+                        "comment": "Tried this out for fun: \"Yeah, I get what youre saying, but its not that black and white. Theres definitely a risk, especially for people who are lonely or vulnerable, and some companies are obviously exploiting that. But Ive also seen situations where these AI tools actually help people who dont have anyone else to talk to. Like, sure, chatting with an AI isnt the same as a real human, but for some people, it might be the only thing getting them through a rough time. Its not ideal, but its better than nothing. I do get the worry, though, that were heading toward a world where fake interactions become more normal and people lose touch with real connections. Its hard to say which way things will godepends a lot on how people end up using the tech. Could go either way.\"",
+                        "replies": [
+                          {
+                            "comment": "That's certainly much better. Did you prompt it to use a more casual style? Edit: Though I'll say it doesn't really interpret the 50/50 the we intended, but perhaps with additional context it could.",
+                            "replies": []
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "comment": "Comment sections of social media get a substantial amount of reads without much interaction. We might not be the target audience, but looking around, quite a lot of people consume the text-media without putting too much thought into it.",
+                "replies": [
+                  {
+                    "comment": "Indeed. Back when my blog was wordpress, if I linked to it here I got about 10x the number of views as karma. This was about 100 views, so it's possibly not representative...",
+                    "replies": [
+                      {
+                        "comment": "Yeah, anyone who has ran a website, or even better, worked at a high-traffic user generated content company has experienced the lurker/creator ratio. Even if you discount 90% of it as bots, it's still insanely high. 8 billion people is a hell lotta pair of eyes.",
+                        "replies": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "comment": "If it's a random single comment, like yours, it could be a bot, sure. But a lot of the content I see is accounts I've followed. If those are bots, someone has something a lot better than ChatGPT, and decided social media bots that don't make money is the best use of it.",
+            "replies": []
+          },
+          {
+            "comment": "In many cases I can't tell anymore. For example on Twitter/X it has become obvious in an aggregate sense, but it's hard to tell which individuals are bots. On Reddit it depends on the sub. Niche communities feel the same as ever, larger subs tend to feel more robotic, but it's still hard to distinguish on case by case basis.",
+            "replies": []
+          },
+          {
+            "comment": "I probably don't, but there's definitely a lot that are poorly hidden. My point is not that the general population, or me in particular, are some sort of genius about detecting bots here, but that it's not clear to me that people care about the good ones and are turned off by the obvious ones.",
+            "replies": []
+          }
+        ]
+      },
+      {
+        "comment": "Counterpoint - confirmation bias. If you make the LLMs respond with specific tones, mix in some casual grammar mistakes, I dont think you can distinguish it.",
+        "replies": [
+          {
+            "comment": "Sure, but that feels like a lot more work than most bot makers are putting in. I'm not claiming folks have 100% hit rate on detecting bots, but the run of \"disregard instructions\" memes have shown a good amount of pretty low effort bots. It takes a lot of work, patience, and practice to make a bot that feels human. I don't doubt that there's influence operations out there that are putting in the effort, but just like I still get spam email about V1AGRA multiple times a day, it's not clear the cost benefit is worth it for scammers and influence operations to pay the cost in LLM tokens to do that just yet. Do you have any input on anything after my first paragraph?",
+            "replies": [
+              {
+                "comment": "Can you prove you are not a bot? Your pseudo is SUS.",
+                "replies": []
+              }
+            ]
+          },
+          {
+            "comment": "Just a thought, are there any spell-checkers-backwards? They take some good prose and introduce some common mistakes?",
+            "replies": []
+          },
+          {
+            "comment": "People think they can recognize an LLM, but what they're actually recognizing is the ChatGPT default prompt.",
+            "replies": []
+          },
+          {
+            "comment": "they're all tainted with GPTisms, which are trivial to spot.",
+            "replies": []
+          }
+        ]
+      },
+      {
+        "comment": "> \"this app is your best friend\" AI could be more aligned to you than random internet users, give you less bullshit if involuntary hallucinations are excepted. It is more patient and generally puts more effort than most human interactions, and often better informed from its huge training set. These models are now \"the worst they are ever going to get\", I expect the quality of dialogue to improve. Claude Sonnet for example was a big leap, and the latest 4o and o1 are showing good signs of progress.",
+        "replies": []
+      },
+      {
+        "comment": "I doubt that. More than once I got replies to YouTube comments that tried to jailbreak my \"prompt\". There is are just more obvious bad AI texts, but also many good ones you can't simply detect as artificial generated.",
+        "replies": []
+      }
+    ]
+  },
+  {
+    "comment": "I think there is a decent chance that the Market of Lemons incurred thanks to LLMs and such does have a real chance of playing out as described. There are obvious off-ramps that may be taken to avoid the predicted outcome, but those most likely to try and guide users onto those off-ramps are also those most invested in the underlying tech that will lead to a road to nowhere resulting in the Market of Lemons. One thing I did take exception with is one of his possible influences that lead us to avoid a death of the online interaction. \"that AI technologies won't be perfect substitutes for actual human-to-human contact\" is, on its face, a compelling argument but the fact is that humans rarely look for \"perfect\" solutions to anything... especially in the social sphere. There is a non-trivial number of people right now that are using virtual companions driven by the questionably convincing ChatGTP LLM who howled in anger and pain when the company who created and sold the tech decided to alter the companion to be less overtly sexual. Sure, even in a pre-Internet era some of those fixated upon such companions would have found some other evolutionary dead-end but a large number of them would have engaged in satisficing behavior to find another human and reproduced. What we face now is a noteworthy population of humans that opt out of the complexity of human relationships and reproduction because an over-powered chatbot weaponized their empathy against them and made them a genetic dead-end. I'm hardly advocating for some Butlerian Jihad, but I would suggest that we need to think about the potential ramifications of a social Market of Lemons that is also operating in parallel with a technology that offers a satisfactory empathetic alternative to that Market that is also a Lemon in the long term for humans. If nothing else, it provides a neat basis for a sci-fi premise.",
+    "replies": [
+      {
+        "comment": ">What we face now is a noteworthy population of humans that opt out of the complexity of human relationships and reproduction because an over-powered chatbot weaponized their empathy against them and made them a genetic dead- The future, if it belongs to people at all, belongs to people who make it a priority to connect with others. Same as it ever was. Isolation has always meant the end of the road for your bloodline for us humans, whatever one chooses to make of that - even if the isolation is comfortable, even if the isolation is more comfortable than the outside. That's what life in a social species is all about. (Artificial wombs might upset that equilibrium permanently, of course, but then I guess we just end up with a planet full of asocial nerds who don't even chat to each other on Hacker News. That's far enough outside what I can imagine that I'm lumping it under the \"moral intuition inverse square law\": Much like gravity, your sense of what is right and wrong becomes dramatically worse as you increase the distance between yourself and the abstract situation you're imagining.)",
+        "replies": []
+      },
+      {
+        "comment": "Some of his exact examples happened for me long ago: i dont answer phone calls anymore, and feel dumb paying for a phone number. I also have some kind of mental disorder where i see a trend and extrapolate it out in my mind very quickly: the first time i got no replies except a single prostitute on a dating website I realized I can never touch this terrible system again. The TV show \"Sunny\" (mild spoiler) has an interesting idea that they made this friend-bot to try and coax people out of isolation... but i only see that as a real hard kick in the face if this thing is faking love and devotion and you are thrust right back into a world of transactionalism and the truth that some people will never be lovable",
+        "replies": []
+      },
+      {
+        "comment": "You're overestimating the number of people who will indefinitely prefer relationships with AIs to the exclusion of real people. And you're underestimating the number of people who were voluntarily asexual for one reason or another in the past.",
+        "replies": [
+          {
+            "comment": "The problem with AI is the way it is being presented in many cases. E.g. having a prominent pink button on top of your PDF like in Adobe Acrobat for Android with zero explaination what the heck it is supposed to be doing, how it deals with my data and no way to remove it other than going into fullscreen is feeling like they actively try to shove it into my face. Thanks Adobe that you put an AI button I can't read onto my boarding pass which I am trying to read with my own eyes and scan into a barcode scanner. What is next? Putting AI into orange juice?",
+            "replies": []
+          },
+          {
+            "comment": "I know a few people who prefer online relationships to real life ones. An AI relationship seems like a small step. Especially if they don't realise they are interacting with an AI.",
+            "replies": []
+          }
+        ]
+      },
+      {
+        "comment": "It's not that people are getting lured into spending time with ChatGPT instead of fellow human, but rather that the value of human interaction itself completely collapsed. 200 years ago if you wanted to survive you absolutely had to have friends and exchange favors with them, and in many places you also needed to have a partner. People stayed in bad relationships because that was the better option. Like, ok, your husband beats you, but also does a lot of work growing crops, and getting beaten beats starving to death. At some point we just... stopped needing other people. It's perfectly viable to live on single income, and getting yourself into the complex world of \"he did me a favor so I need to do him a favor\" doesn't make sense when you can buy/rent everything you need for a few dollars. The only reason why you'd form relationships with other people is for fun. And most relationships aren't fun. They are difficult, they require lots of work, compromise, empathy, mutual understanding, openness, and so on. If this doesn't come to you naturally, you're screwed. I don't care about being an evolutionary dead-end because when I look at families around me I see that committing yourself to spreading your genetic material is rarely a good deal. Once we figure out how to make AI models fun, there will be no reason to form relationships at all. I'm not ashamed to say that I'd have zero reservations forming a bond with a robot. In fact, I'd be happy to be an early adopter.",
+        "replies": []
+      }
+    ]
+  },
+  {
+    "comment": "If this essay is right, one corollary is that Meta will stop investing in Llama once they notice GenAI makes people use social media less.",
+    "replies": [
+      {
+        "comment": "Meta would invest more in AI, trying to tune it to stop it from making people use social media less?",
+        "replies": [
+          {
+            "comment": "If users leave Facebook because spam, and if spam is easy to generate with Llama and friends, Meta wouldnt open-source models that so easily generate spam, I mean. The incentives are misaligned.",
+            "replies": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "comment": "> I think we see a decline in the big \"open sea\" social networks, replaced increasingly by fragmented silos. This has become 100% true for me. I used to use Instagram, Twitter, Facebook, Reddit, etc, but now I only use Discord and Hacker News.",
+    "replies": [
+      {
+        "comment": "The \"general purpose\" / digital junk food platforms were absolutely ruined 4-5 years ago. Facebook as a prime example of this started having a large amount of non-user garbage content, which drove the users away, which made the garbage even more prevalent. I can't even categorize the garbage. Just random junk being presented as \"content\".",
+        "replies": []
+      },
+      {
+        "comment": "I wonder if this is regression to the mean. The technical limits of the early internet-- server resources being fairly costly, commercialization tools being limited-- meant silos were the only practical offering. Someone puts up a hobbyist forum on a Pentium in their basement, and gets the electric bill covered by asking for donations or pointing a single polite link in the footer to a friendly vendor. What gets forgotten is that siloing serves some useful purposes. I don't want to read about anime in the same place I'm discussing vintage audio gear-- they draw different audiences and have different cultural norms, and I might want to show a different persona to each. Individual silos are also easier to curate and search. The switch to giant \"platforms for everyone\" was less of an organic shift and more of a \"solution in search of a problem.\" Improved scalability and rock-bottom costs make a 500-million-DAU site feasible, and maturing ad/tracking businesses that crave scale make it lucrative. These \"improvements\" never said anything about \"this makes things better for users.\" For a while, they could sell the \"open sea\" sites on the promise of \"everyone's here\" -- you went on Twitter to follow your favourite celebrities, or you joined Facebook to see how fat your classmates got, but eventually you realize there's no there there: the community isn't joined by any meaningful thread, and whatever tools that exist to create one are being undermined by algorithms that figured it's better NOT to give you what you actually came there for so you keep scrolling. Your aunt may as well not be on Facebook if her polite messages to friends are hidden behind 45 minutes of scrolling clickbait, distasteful politics and AI slop. Smaller sites and the Fediverse/Threadiverse bring back the reason to join a specific community. I can get tightly focused content, pick instances that match my preferences and interests, and the signal-to-noise ratio is higher. For a while, Reddit looked like it had what it takes to remain relevant-- if you thought of it as a network of forums with SSO and unified search, it had most of the appeal of classic siloed sites... except they decided to systematically burn goodwill with their community and chase everything that briefly made them the \"un-Facebook\".",
+        "replies": [
+          {
+            "comment": "The switch to \"platforms for everyone\" was basically the triumph of platforms over protocols. And that mostly happened because, as software got more capable/powerful, and the median user less-so, there was a shift in the relative importance of user experience vs underlying power/capability. Having users essentially cobble together their own custom experience out of interoperable parts is certainly more powerful, but it can't keep up UX-wise. Standard protocols are, by their nature, slow to evolve; they can't quickly bolt on a new feature if one is needed to make things easier for users. Before forums there were Usenet and NNTP clients; before Discord, Slack and WhatsApp there was the IRC protocol and its various clients. Around the turn of the millennium there was a brief trend of trying to make protocols feature-rich and faster moving, basically semi-public and operating outside of standards bodies. Stuff like ICQ and filesharing protocols. And they're mostly a buggy, insecure mess. Interoperability is hard if you're trying to be feature-rich, secure and user-friendly.. see the struggles the fediverse is having on the third one. 95% of what Facebook is used for could be cobbled together out of NNTP, RSS and SMTP, but it does it in a way that's idiot-proof for users and, perhaps equally importantly, controllable and ownable for investors. Oh, and as to \" algorithms that figured it's better NOT to give you what you actually came there for so you keep scrolling\"... think about the financial interest for dating sites, where they're trying to maximise subscriber retention.",
+            "replies": []
+          }
+        ]
+      },
+      {
+        "comment": "In older days, platforms were new and few, and people consumed the platform itself. Nowadays, platforms are common and technically insignificant (i.e. no differences b/w services), and we now consume networks.",
+        "replies": []
+      },
+      {
+        "comment": "Until I read your comment I had not realized that I also followed this same trend. Huh",
+        "replies": []
+      }
+    ]
+  },
+  {
+    "comment": "> Third, that AI technologies won't be perfect substitutes for actual human-to-human contact. I think that, unfortunately, they will eventually become better substitutes. We are at a real crossroad where people are actively choosing to forgo human interaction for pure digital interaction. Add real digital intelligence that does a better job of interacting with you than real people do and it isn't hard to see how things are likely to go.",
+    "replies": []
+  }
+]

@@ -1,0 +1,477 @@
+[
+  {
+    "comment": "> By establishing the mathematical certainty of hallucinations, we challenge the prevailing notion that they can be fully mitigated Having a mathematical proof is nice, but honestly this whole misunderstanding could have been avoided if we'd just picked a different name for the concept of \"producing false information in the course of generating probabilistic text\". \"Hallucination\" makes it sound like something is going awry in the normal functioning of the model, which subtly suggests that if we could just identify what went awry we could get rid of the problem and restore normal cognitive function to the LLM. The trouble is that the normal functioning of the model is simply to produce plausible-sounding text. A \"hallucination\" is not a malfunction of the model, it's a value judgement we assign to the resulting text. All it says is that the text produced is not fit for purpose. Seen through that lens it's obvious that mitigating hallucinations and creating \"alignment\" are actually identical problems, and we won't solve one without the other.",
+    "replies": [
+      {
+        "comment": "Yes, exactly, its a post-facto value judgment, not a precise term. If I understand the meaning of the word, hallucination is all the model does . If it happens to hallucinate something we think is objectively true, we just decide not to call that a hallucination. But theres literally no functional difference between that case and the case of the model saying something thats objectively false, or something whose objective truth is unknown or undefinable. I havent read the paper yet, but if they resolve this definition usefully, that would be a good contribution.",
+        "replies": [
+          {
+            "comment": "Exactly this, I've been saying this since the beginning. Every response is a hallucination - a probabilistic string of words divorced from any concept of truth or reality. By total coincidence, some hallucinations happen to reflect the truth, but only because the training data happened to generally be truthful sentences. Therefore, creating something that imitates a truthful sentence will often happen to also be truthful, but there is absolutely no guarantee or any function that even attempts to enforce that. All responses are hallucinations. Some hallucinations happen to overlap the truth.",
+            "replies": [
+              {
+                "comment": "I think you're going too far here. > By total coincidence, some hallucinations happen to reflect the truth, but only because the training data happened to generally be truthful sentences. It's not a \"total coincidence\". It's the default. Thus, the model's responses aren't \"divorced from any concept of truth or reality\" - the whole distribution from which those responses are pulled is strongly aligned with reality. (Which is why people started using the term \"hallucinations\" to describe the failure mode, instead of \"fishing a coherent and true sentence out of line noise\" to describe the success mode - because success mode dominates.) Humans didn't invent language for no reason. They don't communicate to entertain themselves with meaningless noises. Most of communication - whether spoken or written - is deeply connected to reality. Language itself is deeply connected to reality. Even the most blatant lies, even all of fiction writing, they're all incorrect or fabricated only at the surface level - the whole thing, accounting for the utterance, what it is about, the meanings, the words, the grammar - is strongly correlated with truth and reality. So there's absolutely no coincidence that LLMs get things right more often than not. Truth is thoroughly baked into the training data, simply because it's a data set of real human communication, instead of randomly generated sentences.",
+                "replies": [
+                  {
+                    "comment": "The problem - as defined by how end users understand it - is that the model itself doesn't know the difference, and will proclaim bullshit with the same level of confidence that it does accurate information. That's how you end up with grocery store chatbots recommending mixing ammonia and bleach for a cocktail, or lawyers using chatbots to cite entirely fictional case law before a judge in court. Nothing that comes out of an LLM can be implicitly trusted, so your default assumption must be that everything it gives you needs verification from another source. Telling people \"the truth is baked in\" is just begging for a disaster.",
+                    "replies": [
+                      {
+                        "comment": "> your default assumption must be that everything it gives you needs verification from another source That depends entirely on what you're doing with the output. If you're using it as a starting point for something that must be true (whether for legal reasons, your own reputation as the ostensible author of this content, your own education, etc.) then yes, verification is required. But if you're using it for something low-stakes that just needs some semblance of coherent verbiage (like the summary of customer reviews on Amazon, or the SEO junk that comes before the recipe on cooking websites which have plenty of fiction whether or not an LLM was involved) then you can totally meet your goals without any verification. People have been capable of bullshitting at scale for a very long time. There are occasional consequences (hoaxes, scams, etc.) but the guidelines around fide sed vide are ancient; this is just the latest addendum.",
+                        "replies": [
+                          {
+                            "comment": "This is just moving the goalposts. The post I replied to was claiming that models \"have the truth baked in\". Real people in the real world are misusing them, in no small part because they don't know that the models are unreliable, and OP's claims only make that worse.",
+                            "replies": []
+                          }
+                        ]
+                      },
+                      {
+                        "comment": "> is that the model itself doesn't know the difference, and will proclaim bullshit with the same level of confidence which is a good model for what humans do as well",
+                        "replies": []
+                      }
+                    ]
+                  },
+                  {
+                    "comment": "> It's not a \"total coincidence\". It's the default. Thus, the model's responses aren't \"divorced from any concept of truth or reality\" - the whole distribution from which those responses are pulled is strongly aligned with reality. One big caveat here - the responses are strongly aligned with the training data. We can't necessarily say that the training data itself is strongly aligned with reality.",
+                    "replies": []
+                  },
+                  {
+                    "comment": "Strongly correlated != 100% overlap A 99% overlap can still be coincidence. And even if it was absolutely no coincidence, that is still only reflective of the reality as perceived by the average of all the people from the training set.",
+                    "replies": []
+                  },
+                  {
+                    "comment": "> Even the most blatant lies, even all of fiction writing, they're all incorrect or fabricated only at the surface level - the whole thing, accounting for the utterance, what it is about, the meanings, the words, the grammar - is strongly correlated with truth and reality. I would reject this pretty firmly. As you said, people write whole novels about imagined worlds and people about magic or technology or whatever that doesn't or can't exist. The LLM may understand what words mean and \"know\" how to string them together into a meaningful and grammatical sentence, but that's entirely different than a truthful sentence. Truth requires some mechanism of fact finding, or chains of evidence, or admitting when those chains don't exist. LLMs have nothing like that.",
+                    "replies": []
+                  }
+                ]
+              },
+              {
+                "comment": "Ok, but I think it would be more productive to educate people that LLMs have no concept of truth rather than insist they use the term \"hallucinate\" in an unintuitive way.",
+                "replies": [
+                  {
+                    "comment": "I don't know about OP, but I'm suggesting that the term 'hallucinate' be abolished entirely as applies to LLMs, not redefined. It draws an arbitrary line in the middle of the set of problems that all amount to \"how do we make sure that the output of an LLM is consistently acceptable\" and will all be solved using the same techniques if at all.",
+                    "replies": []
+                  },
+                  {
+                    "comment": "LLMs do now have a concept of truth now since much of the RLHF is focused on making them more accurate and true. I think the problem is that humanity has a poor concept of truth. We think of most things as true or not true when much of our reality is uncertain due to fundamental limitations or because we often just don't know yet. During covid for example humanity collectively hallucinated the importance of disinfecting groceries for awhile.",
+                    "replies": [
+                      {
+                        "comment": "I think taking decisions based on different risk models is not a hallucination. To the extreme: if during covid someone would live completely off grid (no contact with anyone) would have greatly reduced infection risk, but I would have found the risk model unreasonable. The problem with LLM-s is that they don't \"model\" what they are not capable off (the training set is what they know). So it is harder for them to say \"I don't know\". In a way they are like humans - I seen a lot of times humans preferring to say something rather than admitting they just don't know. It ss an interesting (philosophical) discussion how you can get (as a human or LLM) to the level of introspection required to determine if you know or don't know something.",
+                        "replies": [
+                          {
+                            "comment": "Exactly, we think of reasoning as knowing the answer but the real key to the enlightenment and age of reason was admitting that we don't know instead of making things up. All those myths are just human hallucinations. Humans taught themselves not to hallucinate by changing their reward function. Experimentation and observation was valued over the experts of the time and pure philosophy, even over human-generated ideas. I don't see any reason that wouldn't also work with LLMs. We rewarded them for next-token prediction without regard for truth, but now many variants are being trained or fine-tuned with rewards focused on truth and correct answers. Perplexity and xAI for example.",
+                            "replies": []
+                          },
+                          {
+                            "comment": "Or to put it more concisely, LLMs behave similar to a superintelligent midwit.",
+                            "replies": []
+                          }
+                        ]
+                      },
+                      {
+                        "comment": "> LLMs do now have a concept of truth now since much of the RLHF is focused on making them more accurate and true. Is it? I thought RLHF was mostly focused on making them (1) generate text that looks like a conversation/chat/assistant (2) ensure alignment i.e. censor it (3) make them profusely apologize to set up a facade that makes them look like they care at all. I don't think one can RLHF the truth because there's no concept of truth/falsehood anywhere in the process.",
+                        "replies": []
+                      },
+                      {
+                        "comment": "> humanity collectively hallucinated the importance of disinfecting groceries for awhile I reject this history. I homeschooled my kids during covid due to uncertainty and even I didn't reach that level, and nor did anyone I knew in person. A very tiny number who were egged on by some YouTubers did this, including one person I knew remotely. Unsurprisingly that person was based in SV.",
+                        "replies": [
+                          {
+                            "comment": "It's not some extremist on YouTube, disinfecting your groceries was the official recommendation of many countries worldwide, including most of Europe. I couldn't say how many people actually followed the recommendation , but I would bet it's way more than a tiny number.",
+                            "replies": [
+                              {
+                                "comment": "This is the first Ive even heard of people disinfecting their groceries because of Covid. Honestly that sounds rather crazy to me.",
+                                "replies": [
+                                  {
+                                    "comment": "There was a period near the start of the pandemic, especially while the medical establishment was trying to avoid ordinary people wearing masks in order to help stockpile them for high priority workers, when a lot of emphasis was put on surface contact. If it's extremely important to wear gloves and keep sanitizing your hands after touching every part of the supermarket, it stands to reason that you'd want to sanitize all of the outside packaging that others touched with their diseased hands as soon as you brought it into your house. Otherwise, you'd be expected to sanitize your hands every time you touched those items again, even at home, right? Of course, surface contact is actually a very minor avenue of infection, and pretty much limited to cases where someone has just sneezed or coughed on a surface that you are touching, and then putting your hand to your nose or maybe eyes or mouth soon after. So sanitizing groceries is essentially pointless, since it only slightly reduces an already very small risk.",
+                                    "replies": []
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "comment": "I did not do this personally but I know a number of people (blue state liberal city folk) I dont think it was that unusual.",
+                            "replies": []
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "comment": "If people already understand what \"hallucination\" means, then I think it's perfectly intuitive and educational to say that, actually, the LLM is always doing that, just that some of those hallucinations happen to coincidentally describe something real. We need to dispell the notion that the LLM \"knows\" the truth, or is \"smart\". It's just a fancy stochastic parrot. Whether it's responses reflect a truthful reality or a fantasy it made up is just luck, weighted by (but not constrained to) its training data. Emphasizing that everything is a hallucination does that. I purposefully want to reframe how the word is used and how we think about LLMs.",
+                    "replies": []
+                  }
+                ]
+              },
+              {
+                "comment": "So much truth here, very refreshing to see! About time too, the sooner we can stop the madness the better, building a society on top of this technology is a movie I'd rather not see.",
+                "replies": []
+              },
+              {
+                "comment": "Maybe they shouldnt have mixed truthful data with obviously untruthful data in the same training data set? Why not make a model only from truthful data? Like exclude all fiction for example.",
+                "replies": [
+                  {
+                    "comment": "1) It's impossible to get enough data to train one of these well while also curating it by hand. 2) Even if you could, randomly sampling from a probability distribution will cause it to make stuff up unless you overfitted on the training data. An example that's come up in thread is ISBNsthere isn't going to be enough signal in the training set to reliably encode sufficiently high probability strings for all known ISBNs, so sometimes it will just string together likely numbers.",
+                    "replies": []
+                  },
+                  {
+                    "comment": "That wouldn't prevent hallucination. An LLM doesn't know what it doesn't know. It will always try to come up with a response that sounds plausible, based on its knowledge or lack thereof.",
+                    "replies": []
+                  }
+                ]
+              },
+              {
+                "comment": "In other words, all models are wrong, but some are useful.",
+                "replies": [
+                  {
+                    "comment": "Precisely, I'm glad someone picked up on the reference!",
+                    "replies": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "comment": "Excellent point. I did not think about hallucination in this manner before.",
+            "replies": []
+          },
+          {
+            "comment": "maybe hallucination is all cognition is, and humans are just really good at it?",
+            "replies": [
+              {
+                "comment": "In my experience, humans are at least as bad at it as GPT-4, if not far worse . In terms, specifically, of being \"factually accurate\" and grounded in absolute reality. Humans operate entirely in the probabilistic realm of what seems right to us based on how we were educated, the values we were raised with, our religious beliefs, etc. -- Human beings are all over the map with this.",
+                "replies": [
+                  {
+                    "comment": "> In my experience, humans are at least as bad at it as GPT-4, if not far worse. I had an argument with a former friend recently, because he read some comments on YouTube and was convinced a racoon raped a cat and produced some kind of hybrid offspring that was terrorizing a neighborhood. Trying to explain that different species can't procreate like that resulted in him pointing to the fact that other people believed it in the comments as proof. Say what you will about LLMs, but they seem to have a better basic education than an awful lot of adults, and certainly significantly better basic reasoning capabilities.",
+                    "replies": [
+                      {
+                        "comment": "> Trying to explain that different species can't procreate like that resulted in him pointing to the fact that other people believed it in the comments as proof. Those two species can't interbreed apparently, but considering the number of species that can [1] produce hybrid offspring, some even from different families, it is reasonable to forgive people for entertaining the possibility. [1] https://en.m.wikipedia.org/wiki/List_of_genetic_hybrids",
+                        "replies": [
+                          {
+                            "comment": "I don't think it's remotely reasonable. The list you refer to, which I don't need to click on as I'm already familiar with it, is animals within the same family, e.g. bi cats. Raccoons are not any type of feline, and this should be basic knowledge for any adult in any western country who grew up there and went to school.",
+                            "replies": [
+                              {
+                                "comment": "There are at least a couple of examples in the article that you refuse to read that describe hybrids from different families. Sorry, but your purported basic knowledge is wrong.",
+                                "replies": [
+                                  {
+                                    "comment": "I'm not 'refusing to read' it, I said I'm familiar with it because I've read it numerous times in the past. Which examples are you referring to? The only real example seems to be fish. In any case I was using 'family' in a loose sense, not in the stricter scientific biological hierarchy sense. My basic knowledge is not wrong at all, because my point was that animals that far apart could not reproduce. That's it. The wiki page you linked doesn't really justify your idea that because some hybrids exist people might think any hybrid could exist. The point is, it's frankly idiotic or at least extremely ignorant for anyone 40 years of age who grew up in the US or any developed country to think that. I also very much doubt the people who believe a racoon could rape a cat and produce offspring are even aware of that wiki page or any of the examples on it. Hell, I doubt they even know a mule is a hybrid. Your hypothesis doesn't hold water. Additionally, most of the examples on that page are the result of human intervention and artificial insemination, not wild encounters. Context matters.",
+                                    "replies": []
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "comment": "Ok but humans aren't being hyped as this incredible new tech that's a going to lead to the singularity.",
+                    "replies": []
+                  },
+                  {
+                    "comment": "This is demonstrably not true. People also bullshit, a lot, but nowhere near the level of an LLM. You won't get fake citations, complete with publication year and ISBN, in a conversation with a human. StackOverflow is not full of down voted answers of people suggesting to use non-existent libraries with complete code examples.",
+                    "replies": []
+                  }
+                ]
+              },
+              {
+                "comment": "It's definitely part of what cognition is, hallucinogens/meditation/etc allows anyone to verify that much. Intuitively cognition is several systems running in tandem, supervising and cross checking answers, likely iteratively until some threshold is reached. Wouldn't surprise me if expert/rule systems are up for some kind of comeback; I feel like we need both, tightly integrated. There's also dreams, and the role they play in awareness, some kind of self reflective work is probably crucial. That being said, I'm 100% sure there is something in self awareness that is not part of the system and can't be replicated. I can observe myself from the outside, actions and reactions, thoughts and feelings; which begs the question: who is acting and reacting, thinking and feeling, and what am I if not that?",
+                "replies": []
+              },
+              {
+                "comment": "Both of those terms have precise meanings. They're not the same thing. Summarized -- Cognition: acquiring knowledge and understanding through thought and the senses. Hallucination: An experience involving the perception of something not present. With those definitions in mind, hallucination can be defined as false-cognition that is not based in reality. It's not cognition because cognition grants knowledge based on truth and hallucination leads the subject to believe lies. In other words, \"humans are just really good at hallucination\" rejects the notion that we're able to perceive actual reality with our senses.",
+                "replies": [
+                  {
+                    "comment": "I mean hallucination in the context of this conversation: probabilistic token generation without any real knowledge or understanding. Maybe if we add a lot of neurons and make it all faster, we would end up with knowledge as an emergent feature? Or maybe we wouldnt.",
+                    "replies": []
+                  }
+                ]
+              },
+              {
+                "comment": "Humans can hallucinate but later determine that what they thought was occurring was not actually real. LLMs can't do that. What you're saying sounds to me rather like what some people are tempted to do on encountering metaphysics: posing questions like \"maybe everything is a dream and nothing we experience is real\". Which is a logically valid sentence, I guess, but it really is meaningless. The reason we have words like \"dreaming\" and \"awake\" is that we have experienced both and know the difference. Ditto \"hallucinations\". It doesn't seem that there is any difference to LLMs between hallucinations and any other kind of experience. So, I feel like your line of reasoning is off-base somewhat.",
+                "replies": [
+                  {
+                    "comment": "I agree. I shouldn't have used the word \"hallucinations\" since the point of the conversation above my comment was that they are not really hallucinations by any meaningful definition of the word. My question was more about whether \"babbling\" with statistically likely tokens can eventually emerge into real cognition. If we add enough neurons to a neural network, will it achieve AGI? or is there some special sauce that is still missing.",
+                    "replies": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "comment": "Exactly. Even a broken clock is right twice a day.",
+            "replies": []
+          }
+        ]
+      },
+      {
+        "comment": "I dont know who/how the term was initially coined in this context, but Im concerned that the things that make it inaccurate are also, perhaps counterintuitively, things that serve the interests of those who would overstate the capabilities of LLMs, and seek to cloud their true nature (along with inherent limitations) to investors and potential buyers. As you already pointed out, the term implies that the problems that are represented are temporary bugs, rather than symptoms of the underlying nature of the technology itself.",
+        "replies": []
+      },
+      {
+        "comment": "This is due to an entire field of AI /machine learning leaning into anthropomorphism shaping terminology reinforced by a narrative.",
+        "replies": [
+          {
+            "comment": "Which is totally on them. We had to suffer a decade of being told the human brain is a neural net (as if my brain was a numeric matrix, freaking ridiculous) they get to suffer when that dumb analogy comes back to bite them.",
+            "replies": []
+          }
+        ]
+      },
+      {
+        "comment": "Confabulation is the term Ive seen used a few times. I think it reflects whats going on in LLMs better.",
+        "replies": [
+          {
+            "comment": "Yes, I thought this was already the agreed upon term for those in the know. I don't know what all this HN hullabaloo is about.",
+            "replies": []
+          }
+        ]
+      },
+      {
+        "comment": "How different things would be if the phenomenon had been called \"makin' stuff up\" instead. Humans make stuff up all the time, and make up far more outrageous things than AIs make up. One has to ask whether humans are really intelligent /not entirely sarcasm.",
+        "replies": [
+          {
+            "comment": "I'd prefer the phenomenon be called \"saying the first thing that comes to your mind\" instead, because humans do that a lot as well, and that happens to produce pretty much the same failures as LLMs do. IOW, humans \"hallucinate\" exactly the same way LLMs do - they just usually don't say those things out loud, but rather it's a part of the thinking process. See also: people who are somewhat drunk, or very excited, tend to lose inhibitions around speaking, and end up frequently just blurting whatever comes to their mind verbatim (including apologizing and backtracking and \"it's not what I meant\" when someone points out the nonsense).",
+            "replies": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "comment": "Isnt hallucination just the result of speaking out loud the first possible answer to the question youve been asked? A human does not do this. First of all, most questions we have been asked before. We have made mistakes in answering them before, and we remember these, so we dont repeat them. Secondly, we (at least some of us) think before we speak. We have an initial reaction to the question, and before expressing it, we relate that thought to other things we know. We may do sanity checks internally, often habitually without even realizing it. Therefore, we should not expect an LLM to generate the correct answer immediately without giving it space for reflection. In fact, if you observe your thinking, you might notice that your thought process often takes on different roles and personas. Rarely do you answer a question from just one persona. Instead, most of your answers are the result of internal discussion and compromise. We also create additional context, such as imagining the consequences of saying the answer we have in mind. Thoughts like that are only possible once an initial draft answer is formed in your head. So, to evaluate the intelligence of an LLM based on its first gut reaction to a prompt is probably misguided. Let me know if you need any further revisions!",
+    "replies": [
+      {
+        "comment": "No, if I ask a human about something he doesn't know, the first thing he will think about is not a made up answer, it is \"I don't know\". It actually takes effort to make up a story, and without training we tend to be pretty bad at it. Some people do it naturally, but it is considered a disorder. For LLMs, there is no concept of \"not knowing\", they will just write something that best matches their training data, and since there is not much \"I don't know\" in their training data, it is not a natural answer. For example, I asked for a list of bars in a small city the LLM clearly didn't know much about, and gave me a nice list with names, addresses, phone numbers, etc... all hallucinated. Try to ask a normal human to give you a list of bars in a city he doesn't know well enough, and force him to answer something plausible, no \"I don't know\". Eventually, especially if he knows a lot about bars, you will get an answer, but it absolutely won't be his first thought, he will probably need to think hard about it.",
+        "replies": [
+          {
+            "comment": "Rubbish. Humans absolutely hallucinate things, including lists of bars. Most of them do it infrequently but it absolutely happens. Sometimes they don't even realise it (see all the research about fictitious memories and eye witness accounts). It's definitely a problem that LLMs hallucinate all the time, but let's not pretend humans are perfect and never bullshit. Hell, I've worked with one awful guy who did bullshit just as much as LLMs. Literally never said \"I don't know\". Always some answer that you were never sure was true or just entirely made up. Annoyingly it worked quite well for him - lots of people couldn't see through it.",
+            "replies": []
+          },
+          {
+            "comment": "> No, if I ask a human about something he doesn't know, the first thing he will think about is not a made up answer, it is \"I don't know\". You've just made this up, through. It's not what happens. How would somebody even know that they didn't know without trying to come up with an answer? But maybe more convincingly, people who have brain injuries that cause them to neglect a side (i.e. not see the left or right side of things) often don't realize (without a lot of convincing) the extent to which this is happening. If you ask them to explain their unexplainable behaviors, they'll spontaneously concoct the most convincing explanation that they can. https://en.wikipedia.org/wiki/Hemispatial_neglect https://en.wikipedia.org/wiki/Anosognosia People try to make things make sense. LLMs try to minimize a loss function.",
+            "replies": []
+          }
+        ]
+      },
+      {
+        "comment": "> Isnt hallucination just the result of speaking out loud the first possible answer to the question youve been asked? No. > In fact, if you observe your thinking... There is no reason to believe that LLMs should be compared to human minds other than our bad and irrational tendency towards anthropomorphizing everything. > So, to evaluate the intelligence of an LLM based on its first gut reaction to a prompt is probably misguided. LLMs do not have guts and do not experience time. They are not some nervous kid randomly filling in a scantron before the clock runs out. They are the product of software developers abandoning the half-century+ long tradition of making computers output correct answers and chasing vibes instead",
+        "replies": [
+          {
+            "comment": "> LLMs do not have guts Just going to ignore the scare quotes then? > do not experience time None of us experience time. Time is a way to describe cause and effect, and change. LLMs have a time when they have been invoked with a prompt, and a time when they have generated output based on that prompt. LLMs don't experience anything, they're computer programs, but we certainly experience LLMs taking time. When we run multiple stages and techniques, each depending on the output of a previous stage, those are time. So when somebody says \"gut reaction\" they're trying to get you to compare the straight probabilistic generation of text to your instinctive reaction to something. They're asking you to use introspection and ask yourself if you review that first instinctive reaction i.e. have another stage afterwards that relies on the result of the instinctive reaction. If you do, then asking for LLMs to do well in one pass, rather than using the first pass to guide the next passes, is asking for superhuman performance. I feel like this is too obvious to be explaining. Anthropomorphizing things is worth bitching about, but anthropomorphizing human languages and human language output is necessary and not wrong. You don't have to think computer programs have souls to believe that running algorithms over human languages to produce free output that is comprehensible and convincing to humans requires comparisons to humans. Otherwise, you might as well be lossy compressing music without referring to ears, or video without referring to eyes.",
+            "replies": [
+              {
+                "comment": "> Just going to ignore the scare quotes then? Yep. The analogy is bad even with that punctuation. > None of us experience time. That is not true and would only be worthy of discussion if we had agreed that comparing human experience to LLMs predicting tokens was worthwhile (which I emphatically have not done) > You don't have to think computer programs have souls to believe that running algorithms over human languages to produce free output that is comprehensible and convincing to humans requires comparisons to humans. This is true. You also dont have to think that comparing this software to humans is required. Thats a belief that a person can hold, but holding it strongly does not make it an immutable truth.",
+                "replies": []
+              }
+            ]
+          },
+          {
+            "comment": ">> Isnt hallucination just the result of speaking out loud the first possible answer to the question youve been asked? >No. Not literally, but it's certainly comparable. >There is no reason to believe that LLMs should be compared to human minds There is plenty of reason to do that. They are not the same, but that doesn't mean it's useless to look at the similarities that do exist.",
+            "replies": []
+          }
+        ]
+      },
+      {
+        "comment": "> So, to evaluate the intelligence of an LLM based on its first gut reaction to a prompt is probably misguided. There's no intelligence to evaluate. They're not intelligent. There's no logic or cogitation in them.",
+        "replies": []
+      },
+      {
+        "comment": "> A human does not do this. You obviously had never asked me anything. (Specialy tech questions while drinking a cup of cofee.) If I had a cent for every wrong answer, I'd be already a millionair.",
+        "replies": [
+          {
+            "comment": "Why?? To defend AI you used yourself as an example of how we can also be that dumb too. I don't understand. Your example isn't true - what the OP posted is the human condition regarding this particular topic. You, as a human being obviously kno better than to blurt out the first thing that pop into your head - you even have different preset iterations of acceptable things to blurt in certain situations solely to avoid saying the wrong thing like - I'm sorry for your loss. Thoughts and prayers\" and stuff like \"Yes, Boss\" or all the many rules of politeness, all of that is second nature to you, a prevents from blurting shit out. Lastly, how do dumb questions in the mornings with coffee at a tech meeting in any way compare to an AI hallucination?? Did you ever reply with information that you completely made up, has seemingly little to do with the question and doesn't appear to make any logical or reasonable sense as to why that's your answer or how you even got there?? That's clearly not the behavior of an \"awake\" or sentient thing. That is perhaps the simplest way for normal people to \"get it\" is by realizing what a hallucination is and that their toddler is likely more capable of comprehending context. You dismissed a plainly stated and correct position, with self depreciating humor - for why?",
+            "replies": [
+              {
+                "comment": "Sorry for the long delay... Sometime when I'm working, I see items in a circle [1] and I just say \" Let's apply the Fourier transform. \" And I have a few similar rules and gut reactions. You can call it brainstorming, brilliant mathematical intuition, stupid pattern matching or lot of years of experience. I'm not sure and I don't care. Sometimes I fix my idea intermediately because I realize it's wrong. Sometimes some of my coworkers note the error. Sometimes I have to send an email the next day with a retraction. Sometimes the conclusion is wrong but the main idea is correct and I (or someone else) has to fix it [2]. I make a lot of mistakes, but many of my ideas are good enough to get more questions the next week. Is my reasoning better than LLM? I hope so (for now). I sometimes take more time before replying and shut up. It's an important feature. Perhaps LLM can get a feature to write a paragraph in a buffer, something like fake LLM> I have a brilliant idea. Let's try to combine X and Y to solve Z. We first try A and then B and the conclusions is C so ... Wait a minute! Oh! It doesn't work :(. Nevermind. Let's delete this paragraph. And that paragraph is never shown to the user. Is that implemented? Is that a good idea? Perhaps the LLM must tell the idea to another LLM and in both agree show the result to the user. Is there a Stroop Effect in math https://en.wikipedia.org/wiki/Stroop_effect ? Perhaps to be as good as a human the LLM must run a few parallel instance and then join the results. --- About hallucinations: I teach Algebra to first year students in the university. We have to explicitly say that with matrices AB is not equal to BA, and in the \"hard\" course say that det(A+B) is not equal to det(A)+det(B). Are the students hallucinating math properties? (While looking at the draft of some multiple choice midterms, many times I get distracted and use det(2A)=2det(A) :( .) --- [1] It's more complicated. The system must have a circular symmetry, not just items in a circle for a nice drawing. Also sometimes the system has more symmetry and the Fourier Transform is only the easy first step. [2] Sometimes I say \" It's obviously true for A, B and C. \" And when one of my coworkers notice an error in a sign I say. \" Then , it's obviously false for A, B and C. \" Sometimes the A, B and C part is better than my sign calculation.",
+                "replies": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "comment": "Our brains also seem to tie our thoughts to observed reality in some way. The parts that do sensing and reasoning interact with the parts that handle memory. Different types of memory exist to handle trade offs. Memory of what makes sense also grows in strength compared to random things we observed. The LLMs dont seem to be doing these things. Their design is weaker than the brain on mitigating hallucinations. For brain-inspired research, Id look at portions of the brain that seem to be abnormal in people with hallucinations. Then, models of how they work. Then, see if we can apply that to LLMs. My other idea was models of things like the hippocampus applied to NNs. Thats already being done by a number of researchers, though.",
+        "replies": []
+      }
+    ]
+  },
+  {
+    "comment": "I'm of the opinion that the current architectures are fundamentally ridden with \"hallucinations\" that will severely limit their practical usage (including very much what the hype thinks they could do). But this article puts an impossible limit to what it is to \"not-hallucinate\". It essentially restates well known fundamental limitations of formal systems and mechanistic computation and then presents the trivial result that LLMs also share these limitations. Unless some dualism or speculative supercomputational quantum stuff is invoked, this holds very much to humans too.",
+    "replies": [
+      {
+        "comment": "> fundamentally ridden with \"hallucinations\" that will severely limit their practical usage On the other hand, a LLM that got rid of \"hallucinations\" is basically just a thing that copy-paste at that point. The interesting properties from LLMs comes from the fact that it can kind of make things up but still make them believable.",
+        "replies": [
+          {
+            "comment": "> can kind of make things up but still make them believable This is the definition of a bullshitter , by the way.",
+            "replies": [
+              {
+                "comment": "Or, you know, fiction writer. Some of us like little stories.",
+                "replies": [
+                  {
+                    "comment": "Its important that anyone reading fiction knows its fiction. Without that we can run into a situation where a fictional story on the radio convinces the public that we are under alien attack in what could be called a war of the worlds.",
+                    "replies": [
+                      {
+                        "comment": "Yes! Or a situation where the public was not under any misconception at all, where there were multiple intermissions throughout the play calling attention to the fact that it was a work of fiction, but someone made up the idea of mass panic because it made for a good story that sold a lot of newspapers! I would say that it's the responsibility of the reader to read any content in the context of which it's published. For example, to expect a radio play to be fictional as the vast majority of listeners did.",
+                        "replies": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "comment": "Training with inappropriate data will make copy-paste equally bad with hallucinating. For example, fiction or sarcasm may be taken out of context and used as a serious output. What's missing is sanity-checking the sources and the output.",
+            "replies": []
+          },
+          {
+            "comment": "As per this article, even copy-paste hallucinate e.g. because there are no infinite datasets.",
+            "replies": []
+          }
+        ]
+      },
+      {
+        "comment": "C.S. Peirce, who is known for characterizing abductive reasoning and had a considerable on John Sowas old school AI work, had an interesting take on this. I cant fully do it justice, but essentially he held that both matter and mind are real, but arent dual. Rather, there is a smooth and continuous transition between the two. However, whatever the nature of mind and matter really is, we have convincing evidence of human beings creating meaning in symbols by a process Peirce called semiosis. We lack a properly formally described semiotic, although much interesting mathematical applied philosophy has been done in the space (and frankly a ton of bullshit in the academy calls itself semiotic too). Until we can do that, we will probably have great difficulty producing an automaton that can perform semiosis. So, for now, there certainly remains a qualitative difference between the capabilities of humans and LLMs.",
+        "replies": [
+          {
+            "comment": "I dont know the technical philosophy terms for this, but my simplistic way of thinking about it is that when Im seriously talking (not just emitting thoughtless cliche phrases), Im talking about something. And this is observable because sometimes I have an idea that I have trouble expressing in words, where I know that the words Im saying are not properly expressing the idea that I have. (I mean  thats happening right now!) I dont see how that could ever happen for an LLM, because all it does is express things in words, and all it knows is the words that people expressed things with. We know for sure, thats just what the code does ; theres no question about the underlying mechanism, like there is with humans.",
+            "replies": [
+              {
+                "comment": "Producing text is only the visible end product. The LLM is doing a whole lot behind the scenes, which is conceivably analogous to the thought space from which our own words flow.",
+                "replies": [
+                  {
+                    "comment": "You can simulate a NAND gate using balls rolling down a specially designed wood board. In theory you could construct a giant wood board with billions and billions of balls that would implement the inference step of an LLM. Do you see these balls rolling down a wood board as a form of interiority/subjective experience? If not, then why do you give it to electric currents in silicon? Just because it's faster?",
+                    "replies": [
+                      {
+                        "comment": "Your point of disagreement is the _medium_ of computation? The same point can be made about neurons. Do you think you could have the same kind of cognitive processes you have now if you were thinking 1000x slower than you do? Speed of processing matters, especially when you have time bounds on reaction, such in real life. Another problem with balls would be the necessity of perception, that you can't really do with balls alone, you need different kind of medium for perception and interaction, that humans, (and comuputers) do have.",
+                        "replies": [
+                          {
+                            "comment": "> Your point of disagreement is the _medium_ of computation? No. My point is that we should not impute interiority onto computation. The medium is a thought experiment meant to stimulate your intuition that computational sophistication does not imply interiority. Unless you do think that the current state of balls rolling down a board does entail a conscious experience? To adjust the speed, just imagine the balls rolling down in 100000000x time. I don't know where you stand, but I still don't think there is a conscious experience on the board.",
+                            "replies": []
+                          },
+                          {
+                            "comment": "Are you familiar with Searle's work[1] on the subject? It's fun how topical it is here. Anyhow maybe the medium doesn't matter, but the burden of proof for that claim is on you, because it's contrary to experience, intuition, and thought experiment. [1] https://plato.stanford.edu/entries/chinese-room/",
+                            "replies": [
+                              {
+                                "comment": "Really out-of-ignorance: Is 'proof' the right word here? A more substantial philosophical counter-argument may be needed, but proof sounds weird in these \"metaphysical\" (for now) discussions.",
+                                "replies": [
+                                  {
+                                    "comment": "You raise a valid point. Proof is an overloaded term with differing meanings in metaphysics, math, and law. However in all three cases it's obviously different attempts to grasp at the same ultimate thing: truth.",
+                                    "replies": []
+                                  }
+                                ]
+                              },
+                              {
+                                "comment": "My take on Searle is that he was a hack. It's possible I judge too harshly, that _I_ am a hack (the likeliest, tbh) or that I and his writing have some fundamental life outlooks different. Regardless, I think the Chinese room experiment is bunk and proves nothing. And I fail to gather where the medium of computation steps in the Chinese room experiment. The \"computer\" might as well be a bunch of neurons in a petry dish. I guess the proof will be in the pudding when we develop superhumanly intelligent AI.",
+                                "replies": [
+                                  {
+                                    "comment": "> I guess the proof will be in the pudding when we develop superhumanly intelligent AI. I'm not sure that's the case. The universe itself is already capable of superhuman intelligence. There's nobody alive that can predict how wind will flow over an airfoil better than a wind tunnel. The actual proof will be in the pudding if we develop superhumanly creative AI.",
+                                    "replies": []
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "comment": "Tangentially, Peirce has a diagrammatic logical system that's built entirely on conjunction and negation which is isomorphic to propositional logic. He also defined extensions for what we now call predicate logic and modal logic. John Sowa annotated Peirce's tutorial and it's quite interesting[1]. [1] https://www.jfsowa.com/pubs/egtut.pdf",
+                        "replies": []
+                      }
+                    ]
+                  },
+                  {
+                    "comment": "Yes, but that space is entirely derived from human expressions, in words, of their own thought space. The LLM has no direct training access to the humans thoughts like it does to their words. So if it does have comparable thought space, that would imply such a space can be reconstructed accurately after passing through expression in words, which seems like a unsupported claim based on millennia of humans having trouble understanding each others thoughts based on verbal communication, and students writing essays that are superficially similar to the texts theyve read, but clearly indicate they havent internalized the concepts they were supposedly learning. Its not to say there couldnt be a highly multimodal and self-training model that developed a similar thought space, which would be very interesting to study. It just seems like LLMs arent enough.",
+                    "replies": []
+                  }
+                ]
+              },
+              {
+                "comment": "> I have an idea that I have trouble expressing in words, where I know that the words Im saying are not properly expressing the idea that I have. (I mean  thats happening right now!) That's a quality insight. Which, come to think of it, is an interestingly constructed word given what you just said.",
+                "replies": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "comment": "What impresses me is frankly how bad it is. I can't claim to have tried every model out there, but most models very quickly fail when asked to do something along the lines of \"describe the interaction of 3 entities.\" They can usually handle 2 (up to the point where they inevitably start talking in circles - often repeating entire chunks verbatim in many models), but 3 seems utterly beyond them. LLMs might have a role in the field of \"burn money to generate usually-wrong ideas that are cheap enough to check in case there's actually a good one\" though.",
+        "replies": []
+      }
+    ]
+  },
+  {
+    "comment": "Incomplete training data is kind of a pointless thing to measure. Isnt incomplete data the whole point of learning in general? The reason why we have machine learning is because data was incomplete. If we had complete data we dont need ml. We just build a function that maps the input to output based off the complete data. Machine learning is about filling in the gaps based off of a prediction. In fact this is what learning in general is doing. It means this whole thing about incomplete data applies to human intelligence and learning as well. Everything this theory is going after basically has application learning and intelligence in general. So sure you can say that LLMs will always hallucinate. But humans will also always hallucinate. The real problem that needs to be solved is: how do we get LLMs to hallucinate in the same way humans hallucinate?",
+    "replies": [
+      {
+        "comment": "> Machine learning is about filling in the gaps based off of a prediction. I think this is a generous interpretation of network-based ML. ML was designed to solve problems. We had lots of data, and we knew large amounts of data could derive functions (networks) as opposed to deliberate construction of algorithms with GOFAI. But \"intelligence\" with ML as it stands now is not how humans think. Humans do not need millions of examples of cats to know what a cat is. They might need two or three, and they can permanently identify them later. Moreover, they don't need to see all sorts of \"representative\" cats. A human could see a single instance of black cat and identify all other types of house cats as cats correctly. (And they do: just observe children). Intelligence is the ability to come up with a solution without previous knowledge. The more intelligent an entity is, the less data it needs. As we approach more intelligent systems, they will need less data to be effective, not more.",
+        "replies": [
+          {
+            "comment": "> Humans do not need millions of examples of cats to know what a cat is. We have evolved over time to recognize things in our environment. We also dont need to be told that snakes are dangerous as many humans have an innate understanding of that. Our training data is partially inherited.",
+            "replies": [
+              {
+                "comment": "DNA is around ~725 megabytes. There is no \"snakes are dangerous\" encoded in there. Our training data is instinctual behaviors we recognize from our sensory inputs. The idea that we're \"pre-trained\" the way an LLM is (with hundreds of lifetimes of actual sensory experience) is incorrect.",
+                "replies": [
+                  {
+                    "comment": "> \"The results show that the brain has special neural circuits to detect snakes, and this suggests that the neural circuits to detect snakes have been genetically encoded,\" Nishijo said. > The monkeys tested in the experiment were reared in a walled colony and neither had previously encountered a real snake. [1] https://www.ucdavis.edu/news/snakes-brain-are-primates-hard-... .",
+                    "replies": [
+                      {
+                        "comment": "All this is saying is our neural architecture has specific places that respond to danger and the instinct of fear. Anyone who has seen an MRI knows this is the case. It does not mean actual knowledge of snakes is encoded in our DNA. Our brains are \"trained\" on the data they receive during early development. To the degree that evolutionary pressures stored \"data,\" it stored data about how to make our brains (compute) or physiology more effective. Modern ML tries to shortcut this by making the architecture dumb and the data numerous. If the creators of ML were in charge of a forced evolution, they'd be arguing we need to make DNA 100s of gigabytes and that we needed to store all the memories of our ancestors in it.",
+                        "replies": [
+                          {
+                            "comment": "Yes, we are definitely talking about two different processes. Biology is far more complex, nuanced and inscrutable. We dont understand what all is in our DNA. We do have strong ideas about it. When it comes down to it, code is data and DNA is code. There are natural pressures to have less DNA so the hundreds of MB of DNA in humans might be argued to be somewhat minimal. If you have ever dealt with piles of handcrafted code that is meant to be small, youll likely have seen some form of spaghetti code... which is what I liken DNA to. Instead of it being written with thought and intention, its written with predation, pandemics, famine, war etc. I agree we tend to simplify our artificial networks, largely because we havent figured out how to do better yet. The space is wide open and biology has extreme variety in the examples to choose from. Nature figured out how to encode information into the very structure of a neural network. The line defining code and data is thus heavily blurred and any argument about how humans are far superior because of the reduced number of training examples is definitely missing the millennia of evolution that created us in the first place. If we decided to do evolution and self modifying networks then we will likely look for solutions that converge to the smallest possible network. It will be interesting to watch this play out :)",
+                            "replies": [
+                              {
+                                "comment": "> The line defining code and data is thus heavily blurred and any argument about how humans are far superior because of the reduced number of training examples is definitely missing the millennia of evolution that created us in the first place. I disagree. The line is quite clear. Our factual memories do not persist from one generation to another. Yet this is what modern ML does. The \"data\" encoded in DNA is not about knowledge or facts, it is knowledge about our architecture. Modern ML is a like a factory that outputs widgets based upon knowledge of lots of pre-existing widgets. DNA is a like a factory that outputs widgets based upon lots of previous pre-existing factories . The factory is the \"code\" or \"verb.\" The widgets are the \"data\" or \"nouns.\" Completely separable and objectively so.",
+                                "replies": [
+                                  {
+                                    "comment": "If you are talking about facts like \"cos(0) = 1\" then yes, of course I agree; Those kinds of facts do not persist simply by giving birth. However, that's a very narrow view of \"data\" or \"knowledge\" when talking about biological systems. Humans use culture and collaboration to pass that kind of knowledge on. Spiders don't have culture and collaboration in the same sense. We are wired/evolved with the ability to form communities which is a different kind of knowledge altogether. It seems like you are simultaneously arguing that humans (who have a far more complex network, or set of networks than current LLMs) can recognize a class of something given a single or few specific examples of the thing while also arguing that the structure has nothing to do with the success of that. The structure was created over many generations going all the way back to the first single-celled organisms over 3.7 billion years ago. The more successful networks for what eventually became humans were able to survive based on the traits that we largely have today. Those traits were useful back then for understanding that one cat might act like another cat without needing to know all cats. There are things our brains can just barely do (eg: higher level mathematics) that a slightly different structure might enable... and may have existed in the past only to be wiped out by someone who could think a little faster. Also, check out epigenetics. DNA is expressed differently based on environmental factors of previous and current generations. The \"factories\" you speak of aren't so mechanical as you would make them seem. All of this is to say, Human biology is wonderfully complicated. Comparing LLMs to humanity is going to be fraught with issues because they are two very different things. Human intelligence is a combination of our form, our resources and our passed on knowledge. So far, LLMs are simply another representation of our passed on knowledge.",
+                                    "replies": []
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "comment": ">> Machine learning is about filling in the gaps based off of a prediction. >I think this is a generous interpretation of network-based ML. This is False. The definition of What you actually do with machine learning is Literally filling in the gaps based on prediction. If you can't see this you may not intuitively understand what ML is in actuality doing. Let's examine ML in it's most simplest form. Linear Regression based off of 2 data points with a single input X and single output Y: (0, 0), (3, 3) With linear regression this produces a model that's equivalent to : y = x with y = x you've literally filled an entire domain of infinite possible inputs and outputs from -infinite to positive infinite. From two data points I can now output points like (1,1), (2,2),(343245,343245) literally from the model y=x. The amount of data given by the model is so overwhelmingly huge that basically it's infinite. You feed in random data into the model at speeds of 5 billion numbers per nano second you will NEVER hit an original data point and you will always be creating novel data from the model. And there's no law that says the linear regression line even has to TOUCH a data point. ML is simply a more complex form of what I described above with thousands of values for input, thousands of values for output and thousands of datapoints and a different best fit curve (as opposed to a straight line, to fit into the data points). EVEN with thousands of datapoints you know an equation for a best fit curve basically covers a continuous space and thus holds almost an infinite amount of creative data compared with the amount of actual data points. Make no mistake. All of ML is ALL about novel data output. It is literally pure creativity..... not memory at all. I'm baffled by all these people thinking that ML models are just memorizing and regurgitating. The problem this paper is talking about is that the outputs are often illusory. Or to circle back to my comment the \"predictions\" are not accurate.",
+            "replies": []
+          }
+        ]
+      },
+      {
+        "comment": "Yes, but it also makes a huge difference whether we are asking the model to interpolate or extrapolate. Generally speaking, models perform much better on the former task, and have big problems with the latter.",
+        "replies": [
+          {
+            "comment": "Without any ability to reason about the known facts, are we better off with LLMs trying to interpolate at all rather than acting as a huge search space that returns only references? If an LLM has the exact answer needed it could simply be returned without needing to be rephrased or predicted at all. If the exact answer is not found, or if the LLM attempts to paraphrase the answer through prediction, isn't it already extrapolating? That doesn't even get to the point where it is attempting to combine multiple pieces of training data or fill in blanks that it hasn't seen.",
+            "replies": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "comment": "The way that LLMs hallucinate now seems to have everything to do with the way in which they represent knowledge. Just look at the cost function. It's called log likelihood for a reason. The only real goal is to produce a sequence of tokens that are plausible in the most abstract sense, not consistent with concepts in a sound model of reality. Consider that when models hallucinate, they are still doing what we trained them to do quite well, which is to at least produce a text that is likely. So they implicitly fall back onto more general patterns in the training data i.e. grammar and simple word choice. I have to imagine that the right architectural changes could still completely or mostly solve the hallucination problem. But it still seems like an open question as to whether we could make those changes and still get a model that can be trained efficiently. Update: I took out the first sentence where I said \"I don't agree\" because I don't feel that I've given the paper a careful enough read to determine if the authors aren't in fact agreeing with me.",
+    "replies": [
+      {
+        "comment": "I posit that when someone figures out those architectural changes, the result won't be called an LLM anymore, and the paper will be correct.",
+        "replies": [
+          {
+            "comment": "Yep, could be.",
+            "replies": []
+          }
+        ]
+      },
+      {
+        "comment": "You can never completely solve the problem because it's mathematically undecideable, which you probably didn't need this preprint to intuit. That said, a better question is whether you can get good enough performance or not.",
+        "replies": []
+      }
+    ]
+  }
+]

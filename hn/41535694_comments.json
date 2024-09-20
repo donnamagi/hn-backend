@@ -1,0 +1,255 @@
+[
+  {
+    "comment": "In my opinion this blog post is a little bit misleading about the difference between o1 and earlier models. When I first heard about ARC-AGI (a few months ago, I think) I took a few of the ARC tasks and spent a few hours testing all the most powerful models. I was kind of surprised by how completely the models fell on their faces, even with heavy-handed feedback and various prompting techniques. None of the models came close to solving even the easiest puzzles. So today I tried again with o1-preview, and the model solved (probably the easiest) puzzle without any kind of fancy prompting: https://chatgpt.com/share/66e4b209-8d98-8011-a0c7-b354a68fab... Anyways, I'm not trying to make any grand claims about AGI in general, or about ARC-AGI as a benchmark, but I do think that o1 is a leap towards LLM-based solutions to ARC.",
+    "replies": [
+      {
+        "comment": "So it gives you the wrong answer and then you keep telling it how to fix it until it does? What does fancy prompting look like then, just feeding it the solution piece by piece?",
+        "replies": [
+          {
+            "comment": "Basically yes, but there's a very wide range of how explicit the feedback could be. Here's an example where I tell gpt-4 exactly what the rule is and it still fails: https://chatgpt.com/share/66e514d3-ca0c-8011-8d1e-43234391a0... and an example using gpt-4o: https://chatgpt.com/share/66e515da-a848-8011-987f-71dab56446... I'd share similar examples using claude-3.5-sonnet but I can't figure out how to do it from the claud.ai ui. To be clear, my point is not at all that o1 is so incredibly smart. IMO the ARC-AGI puzzles show very clearly how dumb even the most advanced models are. My point is just that o1 does seem to be noticeably better at solving these problems than previous models.",
+            "replies": [
+              {
+                "comment": "The easiest way I know of to share Claude chats is by using this Chrome extension to create a GitHub gist: https://chromewebstore.google.com/detail/claudesave/bmdnfhji... It's not perfect, but works fine for chats that don't have tables.",
+                "replies": []
+              },
+              {
+                "comment": "> where I tell gpt-4 exactly what the rule is and it still fails It figured out the rule itself. It has problems applying the rule. In this example btw, asking it to write a program will solve the problem.",
+                "replies": []
+              },
+              {
+                "comment": "All examples are 404'd for me.",
+                "replies": [
+                  {
+                    "comment": "Hmm. My first thought was that I shared non-public links, but I double-checked I can access them from another machine.",
+                    "replies": [
+                      {
+                        "comment": "FYI They load fine for me.",
+                        "replies": [
+                          {
+                            "comment": "Yeah seems to just be an issue with my Firefox configuration -- works fine on Edge.",
+                            "replies": []
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "comment": "The pages fail to load on old web browsers.",
+                    "replies": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "comment": "Author here. Which aspects are misleading? How can it be improved?",
+        "replies": [
+          {
+            "comment": "I think the post is great, clear and fair and all that. And I definitely agree with the general point that o1 shows some amount of improvement on generality but with a massive tradeoff on cost. I'm going to think through what I find \"misleading\" as I write this... Ok so I guess it's that I wouldn't be surprised at all if we learn that models can improve a ton w.r.t. human-in-the-loop prompt engineering (e.g. ChatGPT) without a commensurate improvement in programmatic prompt engineering. It's very difficult to get a Python-driven claude-3.5-sonnet agent to solve ARC tasks and it's also very difficult to get claude-3.5-sonnet to solve ARC tasks via the claude.ai UI. The blog post shows that it's also very difficult to get a Python-driven o1-preview agent to solve ARC tasks. From a cursory exploration of o1-preview's capabilities in the ChatGPT UI my intuition is that it's significantly smarter than claude-3.5-sonnet based on how much better it responds to my human-in-the-loop feedback. So I guess my point is that many people will probably come away from the blog post thinking \"there's nothing to see here\", o1-preview is more of the same thing, but it seems to me that it's very clearly qualitatively different than previous models. Aside: This isn't a problem with the blog post at all IMO, we don't need to litter every benchmark post with a million caveats/exceptions/disclaimers/etc.",
+            "replies": []
+          },
+          {
+            "comment": "I think the parent post is complaining that insufficient acknowledgement is given to how good o1 is, because in their contrived testing, it seems better than previous models. I dont think thats true though, its hard to be more fair and explicit than: > OpenAI o1-preview and o1-mini both outperform GPT-4o on the ARC-AGI public evaluation dataset. o1-preview is about on par with Anthropic's Claude 3.5 Sonnet in terms of accuracy but takes about 10X longer to achieve similar results to Sonnet. Ie. its just not that great, and its enormously slow. That probably wasnt what people wanted to hear, even if it is literally what the results show. You cant run away from the numbers: > It took 70 hours on the 400 public tasks compared to only 30 minutes for GPT-4o and Claude 3.5 Sonnet. (Side note: readers may be getting confused about what test-time scaling is, and why thats important. TLDR: more compute is getting better results at inference time. Thats a big deal, because previously, pouring more compute at inference time didnt seem to make much real difference; but overall I dont see how anything youve said is either inaccurate or misleading)",
+            "replies": [
+              {
+                "comment": "I personally am slightly surprised at o1's modest performance on ARC-AGI given the large leaps in performance on other objectively hard benchmarks like IOI and AIME. Curiosity is the first step towards new ideas. ARC Prize's whole goal is to inspire curiosity like this and to encourage more AI researchers to explore and openly share new approaches towards AGI.",
+                "replies": []
+              },
+              {
+                "comment": "What does minutes and hours even mean? Software comparison using absolute time duration is meaningless without a description of the system it was executed on; e.g. SHA256 hashes per second on a Win10 OS and i7-14100 processor. For a product as complex as multiuser TB-sized LLMs, compute time is dependent on everything from the VM software stack to the physical networking and memory caching architecture. CPU/GPU cycles, FLOPs, IOPs, or even joules would be superior measurements.",
+                "replies": [
+                  {
+                    "comment": "These are API calls to a remote server. We don't have the option of scaling up or even measuring the compute they use to run them, so for better or worse the server cluster has to be measured as part of their model service offering.",
+                    "replies": [
+                      {
+                        "comment": "I understand that, but that's only useful if you're only looking at it from a shallow business perspective.",
+                        "replies": []
+                      }
+                    ]
+                  },
+                  {
+                    "comment": "You're right about local software comparisons, but this is different. If I'm comparing two SaaS platforms, wall clock time to achieve a similar task is a fair metric to use. The only caveat is if the service offers some kind of tiered performance pricing, like if we were comapring a task performed on an AWS EC2 instance vs Azure VM instance, but that is not the case with these LLMs. So yes, it may be that the wall clock time is not reflective of the performance of the model, but it is reflective of the performance of the SaaS offerings.",
+                    "replies": []
+                  }
+                ]
+              },
+              {
+                "comment": "I mean, scaling compute at inference actually means using an LLM agent system. Havent we known that chains of agents can be useful for a while?",
+                "replies": []
+              },
+              {
+                "comment": "I agree with basically everything you said but I think you've misunderstood my point. I'll reply to the other comment with more.",
+                "replies": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "comment": "Both Chat GPT 4o and Claude 3.5 can trivially solve this puzzle if you direct them to do program synthesis to solve it. (that is write a program that solves it - e.g. https://pastebin.com/wDTWYcSx ). Without program synthesis (the way you are doing it), the LLM inevitably fails to change the correct position (bad counting and what not)",
+        "replies": [
+          {
+            "comment": "and what prompt you gave them to generate program? Did you tell explicitly that they need to fill cornered cells? If yes, it is not what benchmark is about. Benchmark is to ask LLM to figure out what is the pattern. I entered task to Claude and asked to write py code, and it failed to recognize pattern: To solve this puzzle, we need to implement a program that follows the pattern observed in the given examples. It appears that the rule is to replace 'O' with 'X' when it's adjacent (horizontally, vertically, or diagonally) to exactly two '@' symbols. Let's write a Python program to solve this:",
+            "replies": [
+              {
+                "comment": "arc reasoning challenge. I'm going to give you 2 example input/output pairs and then a third bare input. Please produce the correct third output. It used its COT to understand cornering -- then I got it to write a program. But as I try again, it's not reliable.",
+                "replies": [
+                  {
+                    "comment": "> But as I try again, it's not reliable. this is why I will never try anything like this on a remote server I don't control. all my toy experiments are with local llms that I can make sure are the same ones day after day.",
+                    "replies": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "comment": "Interesting part if you check CoT output, the way it solved: it said the pattern is to make number of filled cells even in each row with neat layout, which is interesting side effect, but not what task was about. It is also referring on some \"assistant\", looks like they have some mysterious component in addition to LLM, or another LLM.",
+        "replies": []
+      }
+    ]
+  },
+  {
+    "comment": "\"Greenblatt\" shown with 42% in the bar chart is GPT-4o with a strategy: https://substack.com/@ryangreenblatt/p-145731248 So, how well might o1 do with Greenblatt's strategy?",
+    "replies": [
+      {
+        "comment": "I bet pretty well! Someone should try this. It's likely expensive but sampling could give you confidence to keep going. Ryan's approach costs about $10k to run the full 400 public eval set at current 4o prices -- which is the arbitrary limit we set for the public leaderboard.",
+        "replies": []
+      }
+    ]
+  },
+  {
+    "comment": "> o1's performance increase did come with a time cost. It took 70 hours on the 400 public tasks compared to only 30 minutes for GPT-4o and Claude 3.5 Sonnet. Sheesh. We're going to need more compute.",
+    "replies": [
+      {
+        "comment": "Polar icecaps shuddering at the thought",
+        "replies": [
+          {
+            "comment": "That is the next major challenge. Ok you can solve a logic puzzle with a gilzillon watts now go power that same level of compute with a cheese burger, or if you are vegan a nice salad.",
+            "replies": []
+          }
+        ]
+      },
+      {
+        "comment": "Intelligence is something that gets monotone easier as compute increases and trivial at the large compute limit (for instance can brute force simulate a human at large enough compute). So increasing compute is the most sure way to ensure success at reaching above human level intelligence (agi)",
+        "replies": [
+          {
+            "comment": "This is...highly speculative and fairly ridiculous to anyone whos attempted to do so",
+            "replies": [
+              {
+                "comment": "I'm giving a proof of a theoretical fact not saying it's feasible",
+                "replies": [
+                  {
+                    "comment": "proof + fact, and theoretical, are very different words, I'm really confused by your meaning here",
+                    "replies": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "comment": ">Intelligence is something that gets monotone easier as compute increases and trivial at the large compute limit (for instance can brute force simulate a human at large enough compute) It gets monotone easier but the increase can be so slow that even using all the energy in the observable universe wouldn't make a meaningful difference, e.g. for problems in the exponential complexity class.",
+            "replies": []
+          },
+          {
+            "comment": "How does one \"brute force simulate a human\"? If compute is the limiting factor, then isn't it currently possible to brute force simulate a human, just extremely slowly?",
+            "replies": [
+              {
+                "comment": "I guess technically, one can try to simulate every single atoms and their interactions with each others to get this result. However, considering how many atoms there are in a cubic foot of meat, this isn't very possible even with current compute. Even trying to solve a PDE with, I don't know, 1e7 factors, is already a hard to crack issue although technically, it is computable. Now take that to the number of atoms in a meatbag and you quickly see why it is pointless to put any effort into this \"extremely slowly\" way.",
+                "replies": [
+                  {
+                    "comment": "We have no way of knowing the initial conditions for this (position etc of each fundamental particle in any brain), even if we assume that we have a good enough grasp on fundamental physics to know the rules.",
+                    "replies": []
+                  },
+                  {
+                    "comment": "But if we had enough compute, it'd be trivial, right? I mean, I didn't think so, but the guy I replied to seems to know so. No, in all seriousness, I realize that \"extremely slowly\" is an understatement. In davidzheng's defense, I assume he likely meant a higher-level simulation of a human, one designed to act indistinguishably from an atom-level simulation. I just think calling that \"trivial with enough compute\" is mistaking merely having the materials for having mastered them.",
+                    "replies": []
+                  }
+                ]
+              },
+              {
+                "comment": "Something something monkey at a typewriter writing Shakespeare",
+                "replies": [
+                  {
+                    "comment": "This is a more water tight proof of the same fact (so we don't have to argue about physics)",
+                    "replies": [
+                      {
+                        "comment": "It's not a proof at all.",
+                        "replies": []
+                      }
+                    ]
+                  },
+                  {
+                    "comment": "Get out of my head!",
+                    "replies": []
+                  }
+                ]
+              },
+              {
+                "comment": "Human brain has 1000 trillion synapses between 68 billion neurons. What are you going to simulate them on? And it's not like you can copy brain's connectivity exactly. Such technologies don't exist.",
+                "replies": [
+                  {
+                    "comment": "I have a computer like that, embedded in my head even! It's good for real-time simulation, but has trouble simulating the same human from even a couple weeks before. In all seriousness, it's simultaneously wondrous and terrifying to imagine the hypothetical tooling needed for such a simulation.",
+                    "replies": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "comment": "Now is a good time to spend with families and do work that feels satisfying. Much change is coming.",
+            "replies": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "comment": "As expected, I've always believed that with the right data allowing the LLM to be trained to imitate reasoning, it's possible to improve its performance. However, this is still pattern matching, and I suspect that this approach may not be very effective for creating true generalization. As a result, once o1 becomes generally available, we will likely notice the persistent hallucinations and faulty reasoning, especially when the problem is sufficiently new or complex, beyond the \"reasoning programs\" or \"reasoning patterns\" the model learned during the reinforcement learning phase. https://www.lycee.ai/blog/openai-o1-release-agi-reasoning",
+    "replies": [
+      {
+        "comment": "My feeling is that this is one reason they decided to hide the reasoning tokens.",
+        "replies": [
+          {
+            "comment": "yes indeed",
+            "replies": []
+          }
+        ]
+      },
+      {
+        "comment": "So basically it's a kind of overfitting with pattern matching features? This doesn't undermine the power of LLMs but it is great to study their limitations.",
+        "replies": []
+      },
+      {
+        "comment": "As expected Im right",
+        "replies": [
+          {
+            "comment": "shouldn't I expect to be right when I have a thesis ? doesn't mean I can't see when I am wrong.",
+            "replies": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "comment": "It really shows how far ahead Anthropic is/was when they released Claude 3.5 Sonnet. That being said, the ARC-agi test is mostly a visual test that would be much easier to beat when these models will truly be multimodal (not just appending a separate vision encoder after training) in my opinion. I wonder what the graph will look like in a year from now, the models have improved a lot in the last one.",
+    "replies": [
+      {
+        "comment": "> I wonder what the graph will look like in a year from now, the models have improved a lot in the last one. Potentially not great. If you look at the AIME accuracy graph on the OpenAI page [1] you will notice that the x-axis is logarithmic. Which is a problem because (a) compute in general has never scaled that well and (b) semiconductor fabrication will inevitably get harder as we approach smaller sizes. So it looks like unless there is some ground-breaking research in the pipeline the current transformer architecture will likely start to stall out. [1] https://openai.com/index/learning-to-reason-with-llms/",
+        "replies": [
+          {
+            "comment": "It's not a problem, because the point at which we are in the logarithmic curve is the only thing that matters. No one in their right mind ever expected anything linear, because that would imply that creating a perfect oracle is possible. More compute hasn't been the driving factor of the last developments, the driving factor has been distillation and synthetic data. Since we've seen massive success with that, I really struggle to understand why people continue to doomsay the transformer. I hear these same arguments year after year and people never learn.",
+            "replies": []
+          },
+          {
+            "comment": "I'm very optimistic about it because native multimodal LLMs have hardly been explored. Also in general, I have yet to see these models plateau, Claude 3.5 Sonnet is a day and night different compared to previous models.",
+            "replies": []
+          }
+        ]
+      }
+    ]
+  }
+]
