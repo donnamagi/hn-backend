@@ -32,6 +32,7 @@ origins = [
     "http://localhost:3000",
     "https://hackernews.news",
     "https://www.hackernews.news",
+    "https://perrichat.com",
 ]
 
 app.add_middleware(
