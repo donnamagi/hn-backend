@@ -33,6 +33,7 @@ origins = [
     "https://hackernews.news",
     "https://www.hackernews.news",
     "https://perrichat.com",
+    "https://www.perrichat.com",
 ]
 
 app.add_middleware(
