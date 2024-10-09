@@ -1,4 +1,6 @@
 from typing import Dict, Any
+import httpx
+import re
 
 
 class MessageService:
@@ -9,9 +11,33 @@ class MessageService:
         """
         Process incoming text messages and generate a response.
         """
-        # logic to process the message
 
-        return "you said: " + message
+        def is_valid_url(url: str) -> bool:
+            url_pattern = re.compile(
+                r"(?:(?:https?|ftp):\/\/)?(?:www\.)?(?:[\w]+\.)+[\w]+(?:\/[\w.\/?%&=]*)?",
+                re.IGNORECASE,
+            )
+            # check if starts with http:// or https://
+            https_pattern = re.compile(r"^(?:http|ftp)s?://", re.IGNORECASE)
+            return (
+                url_pattern.match(url) is not None,
+                https_pattern.match(url) is not None,
+            )
+
+        is_valid, is_https = is_valid_url(message)
+        if is_valid:
+            try:
+                response = (
+                    httpx.get(message) if is_https else httpx.get(f"https://{message}")
+                )
+                response.raise_for_status()
+                return f"You sent a valid URL: {message}"
+            except httpx.HTTPError:
+                return (
+                    f"The URL you sent ({message}) is valid, but I couldn't access it."
+                )
+
+        return f"You said: {message}"
 
     def process_audio_message(self, audio_url: str) -> str:
         """
