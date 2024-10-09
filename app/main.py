@@ -2,11 +2,10 @@ from fastapi import FastAPI
 from contextlib import asynccontextmanager
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.routers import jobs, articles, keywords
+from app.routers import jobs, articles, keywords, whatsapp, webhooks
 from app.dependencies import DatabaseService
 from app.services.Scheduler import SchedulerService
 from app.log import setup_sentry_and_logging
-import os
 
 
 """ This code will be executed once, before the application starts (and stops) receiving requests """
@@ -41,12 +40,14 @@ app.add_middleware(
     allow_origins=origins,
     allow_credentials=True,
     allow_methods=["GET", "POST"],
-    allow_headers=[],
+    allow_headers=["*"],
 )
 
 app.include_router(articles.router)
 app.include_router(keywords.router)
 app.include_router(jobs.router)
+app.include_router(whatsapp.router)
+app.include_router(webhooks.router)
 
 
 @app.get("/")
