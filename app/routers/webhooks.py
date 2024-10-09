@@ -1,8 +1,9 @@
-from fastapi import APIRouter, Request, Response, HTTPException
+from fastapi import APIRouter, Response, Request, HTTPException
 from fastapi.responses import PlainTextResponse
+from app.handlers.webhooks import WebhookHandler
 from pydantic import BaseModel
 from typing import List, Dict, Any
-import httpx
+
 import os
 import logging
 
@@ -24,45 +25,8 @@ class WebhookPayload(BaseModel):
 async def webhook(payload: WebhookPayload):
     logger.info(f"Incoming webhook message: {payload.model_dump()}")
 
-    message = (
-        payload.entry[0]
-        .get("changes", [{}])[0]
-        .get("value", {})
-        .get("messages", [{}])[0]
-    )
-
-    if message.get("type") == "text":
-        business_phone_number_id = (
-            payload.entry[0]
-            .get("changes", [{}])[0]
-            .get("value", {})
-            .get("metadata", {})
-            .get("phone_number_id")
-        )
-
-        async with httpx.AsyncClient() as client:
-            # Send reply message
-            await client.post(
-                f"https://graph.facebook.com/v18.0/{business_phone_number_id}/messages",
-                headers={"Authorization": f"Bearer {GRAPH_API_TOKEN}"},
-                json={
-                    "messaging_product": "whatsapp",
-                    "to": message["from"],
-                    "text": {"body": f"got it: {message['text']['body']}"},
-                    "context": {"message_id": message["id"]},
-                },
-            )
-
-            # Mark message as read
-            await client.post(
-                f"https://graph.facebook.com/v18.0/{business_phone_number_id}/messages",
-                headers={"Authorization": f"Bearer {GRAPH_API_TOKEN}"},
-                json={
-                    "messaging_product": "whatsapp",
-                    "status": "read",
-                    "message_id": message["id"],
-                },
-            )
+    handler = WebhookHandler()
+    await handler.handle(payload)
 
     return Response(status_code=200)
 
