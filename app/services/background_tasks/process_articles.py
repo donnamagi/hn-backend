@@ -4,6 +4,7 @@ from app.services.hn import get_top, get_article, get_best
 from app.services.helpers import get_unique_ids
 from app.models import Article
 from datetime import datetime, timedelta
+import psycopg2
 import logging
 import asyncio
 
@@ -87,16 +88,40 @@ async def process_articles():
             logger.info(f"Error processing article {id}: {str(e)}")
             continue
 
-    # batch insert
+    if not articles:
+        logger.info("No new articles to process.")
+        return True
+
+    def insert_articles_batch(session, articles):
+        session.bulk_insert_mappings(Article, articles)
+        session.commit()
+        logger.info(f"Inserted {len(articles)} articles")
+
     try:
         with get_db() as session:
-            session.bulk_insert_mappings(Article, articles)
-            session.commit()
-            logger.info(f"Inserted {len(articles)} articles")
-    except Exception as e:
-        logger.error(f"Error inserting articles batch: {e}")
-        session.rollback()
-        return False
+            insert_articles_batch(session, articles)
 
-    vector_db.insert(vector_entries)
+        vector_db.insert(vector_entries)
+
+    except Exception as e:
+        if not isinstance(e, psycopg2.errors.UniqueViolation):
+            logger.error(f"Error inserting articles batch: {e}")
+            session.rollback()
+            return False
+
+        logger.info("Duplicate article detected, retrying one by one...")
+        with get_db() as session:
+            for article in articles:
+                try:
+                    session.add(Article(**article))
+                    session.commit()
+
+                    vector_entry = vector_entries[articles.index(article)]
+                    vector_db.insert([vector_entry])
+                except Exception as insert_error:
+                    logger.error(
+                        f"Error inserting article {article['id']}: {insert_error}"
+                    )
+                    session.rollback()
+                    continue
     return True
